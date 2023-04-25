@@ -31,19 +31,23 @@ const warehousesData = [
 function WarehouseList() {
   const warehouses = warehousesData;
 
+  const handleDelete = (id) => {};
+
+  const handleEdit = (id) => {};
+
   return (
     <div className="warehouse-list">
       <div className="warehouse-list__header-row">
-        <div className="warehouse-list__header-item warehouse-list__header-item--main">
+        <div className="warehouse-list__header-item warehouse-list__header-item--name">
           WAREHOUSE <img className="warehouse-list__icon" src={sortIcon} alt="sort" />
         </div>
-        <div className="warehouse-list__header-item warehouse-list__header-item--main">
+        <div className="warehouse-list__header-item warehouse-list__header-item--address">
           ADDRESS <img className="warehouse-list__icon" src={sortIcon} alt="sort" />
         </div>
-        <div className="warehouse-list__header-item">
+        <div className="warehouse-list__header-item warehouse-list__header-item--contact-name">
           CONTACT NAME <img className="warehouse-list__icon" src={sortIcon} alt="sort" />
         </div>
-        <div className="warehouse-list__header-item">
+        <div className="warehouse-list__header-item warehouse-list__header-item--contact-info">
           CONTACT INFORMATION <img className="warehouse-list__icon" src={sortIcon} alt="sort" />
         </div>
         <div className="warehouse-list__header-item">
@@ -63,6 +67,8 @@ function WarehouseList() {
               contactName={warehouse.contact_name}
               contactEmail={warehouse.contact_email}
               contactPhone={warehouse.contact_phone}
+              onDelete={() => handleDelete(warehouse.id)}
+              onEdit={() => handleEdit(warehouse.id)}
             />
           ))}
         </div>
