@@ -1,0 +1,54 @@
+@use "../../styles/partials/colors";
+@use "../../styles/partials/mixins";
+
+.warehouse-row {
+  text-align: left;
+  border-bottom: 2px solid colors.$secondary-color-cloud;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: adjust-color($color: colors.$primary-color-indigo, $alpha: -0.93);
+  }
+
+  &__contact-item {
+    display: block;
+  }
+
+  &__col {
+    flex: 1;
+
+    &:last-child {
+      text-align: right;
+    }
+
+    &--main {
+      flex: 2;
+    }
+  }
+
+  &__link {
+    font-weight: 600;
+    color: colors.$primary-color-indigo;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__contact-item {
+    color: unset;
+    text-decoration: none;
+  }
+
+  &__icon {
+    vertical-align: middle;
+  }
+
+  &__icon-button {
+    background: none;
+    border: none;
+  }
+}

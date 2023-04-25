@@ -1,0 +1,35 @@
+@use "../../styles/partials/colors";
+@use "../../styles/partials/mixins";
+
+.warehouse-list {
+  text-align: left;
+  //TEMP
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__header-row {
+    color: colors.$secondary-color-slate;
+    background-color: colors.$background-color-grey;
+    @include mixins.tablet__table-header;
+    padding: 0.5rem 2rem;
+    width: 100%;
+    display: flex;
+  }
+
+  &__header-item {
+    flex: 1;
+
+    &:last-child {
+      text-align: right;
+    }
+
+    &--main {
+      flex: 2;
+    }
+  }
+
+  &__icon {
+    vertical-align: middle;
+  }
+}
