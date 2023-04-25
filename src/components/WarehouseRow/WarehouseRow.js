@@ -4,7 +4,7 @@ import chevronRightIcon from "../../assets/Icons/chevron_right-24px.svg";
 import deleteIcon from "../../assets/Icons/delete_outline-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
 
-function WarehouseRow({ id, name, address, contactName, contactEmail, contactPhone }) {
+function WarehouseRow({ id, name, address, city, country, contactName, contactEmail, contactPhone }) {
   return (
     <div className="warehouse-row">
       <div className="warehouse-row__col warehouse-row__col--main">
@@ -13,7 +13,9 @@ function WarehouseRow({ id, name, address, contactName, contactEmail, contactPho
         </Link>
         <img className="warehouse-row__icon" src={chevronRightIcon} alt="open" />
       </div>
-      <div className="warehouse-row__col warehouse-row__col--main">{address}</div>
+      <div className="warehouse-row__col warehouse-row__col--main">
+        {address} {city} {country}
+      </div>
       <div className="warehouse-row__col">{contactName}</div>
       <div className="warehouse-row__col">
         <div className="warehouse-row__contact-info">
@@ -25,7 +27,7 @@ function WarehouseRow({ id, name, address, contactName, contactEmail, contactPho
           </a>
         </div>
       </div>
-      <div className="warehouse-row__col">
+      <div className="warehouse-row__col warehouse-row__col--actions">
         <button className="warehouse-row__icon-button">
           <img className="warehouse-row__icon" src={deleteIcon} alt="delete" />
         </button>

@@ -1,5 +1,5 @@
 @use "../../styles/partials/colors";
-@use "../../styles/partials/mixins";
+@use "../../styles/partials/mixins" as *;
 
 .warehouse-list {
   text-align: left;
@@ -11,13 +11,19 @@
   &__header-row {
     color: colors.$secondary-color-slate;
     background-color: colors.$background-color-grey;
-    @include mixins.tablet__table-header;
+    @include tablet__table-header;
     padding: 0.5rem 2rem;
     width: 100%;
-    display: flex;
+    display: none;
+
+    @include tablet {
+      display: flex;
+      justify-content: space-evenly;
+    }
   }
 
   &__header-item {
+    white-space: nowrap;
     flex: 1;
 
     &:last-child {
@@ -25,8 +31,15 @@
     }
 
     &--main {
-      flex: 2;
+      @include desktop {
+        flex: 2;
+      }
     }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
   }
 
   &__icon {

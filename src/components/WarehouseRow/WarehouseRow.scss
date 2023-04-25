@@ -1,5 +1,5 @@
 @use "../../styles/partials/colors";
-@use "../../styles/partials/mixins";
+@use "../../styles/partials/mixins" as *;
 
 .warehouse-row {
   text-align: left;
@@ -7,9 +7,19 @@
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  @include tablet {
+    flex-wrap: nowrap;
+  }
 
   &:hover {
     background-color: adjust-color($color: colors.$primary-color-indigo, $alpha: -0.93);
+  }
+
+  &__contact-info {
+    min-width: 11.0625rem;
   }
 
   &__contact-item {
@@ -17,14 +27,25 @@
   }
 
   &__col {
-    flex: 1;
+    flex: 50%;
+
+    @include tablet {
+      flex: 1;
+    }
 
     &:last-child {
       text-align: right;
     }
 
     &--main {
-      flex: 2;
+      @include desktop {
+        flex: 2;
+      }
+    }
+
+    &--actions {
+      display: flex;
+      justify-content: space-between;
     }
   }
 
@@ -50,5 +71,6 @@
   &__icon-button {
     background: none;
     border: none;
+    padding: 0;
   }
 }
