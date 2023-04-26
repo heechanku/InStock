@@ -5,13 +5,14 @@ import WarehouseItemPage from "./pages/WarehouseItemPage/WarehouseItemPage";
 import InventoryPage from "./pages/InventoryPage/InventoryPage";
 import InventoryDetailsPage from "./pages/InventoryDetailsPage/InventoryDetailsPage";
 import Header from "./components/Header/Header";
+import DeleteModal from "./components/DeleteModal/DeleteModal";
 import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Header />
+        <Header />
         <div className="App__body">       
 
         <Routes>
