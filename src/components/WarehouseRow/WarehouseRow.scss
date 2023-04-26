@@ -19,6 +19,10 @@
 
   &:first-child {
     border-top: 1px solid colors.$secondary-color-cloud;
+
+    @include tablet {
+      border-top: none;
+    }
   }
 
   &:hover {
@@ -75,6 +79,10 @@
 
   &__cell-header {
     @include mobile__table-header;
+
+    @include tablet {
+      display: none;
+    }
   }
 
   &__link {
