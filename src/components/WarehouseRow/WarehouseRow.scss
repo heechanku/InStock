@@ -1,0 +1,105 @@
+@use "../../styles/partials/colors";
+@use "../../styles/partials/mixins" as *;
+
+.warehouse-row {
+  text-align: left;
+  border-bottom: 1px solid colors.$secondary-color-cloud;
+  padding: 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  @include tablet {
+    padding: 1rem 2.25rem;
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+
+  &:first-child {
+    border-top: 1px solid colors.$secondary-color-cloud;
+  }
+
+  &:hover {
+    background-color: adjust-color($color: colors.$primary-color-indigo, $alpha: -0.93);
+  }
+
+  &__contact-item {
+    display: block;
+  }
+
+  &__col {
+    flex: 0 1 45%;
+
+    @include tablet {
+      flex: 1;
+    }
+
+    &--name {
+      order: -2;
+      @include desktop {
+        flex: 2;
+      }
+    }
+
+    &--address {
+      @include tablet {
+        order: -2;
+      }
+      @include desktop {
+        flex: 2;
+      }
+    }
+
+    &--contact-info {
+      @include tablet {
+        min-width: 9.625rem;
+      }
+    }
+
+    &--actions {
+      text-align: right;
+      flex: 100%;
+      display: flex;
+      justify-content: space-between;
+      // padding: 1rem 0.5rem;
+
+      @include tablet {
+        flex: 1;
+        gap: 1rem;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  &__cell-header {
+    @include mobile__table-header;
+  }
+
+  &__link {
+    font-weight: 600;
+    color: colors.$primary-color-indigo;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__contact-item {
+    color: unset;
+    text-decoration: none;
+  }
+
+  &__icon {
+    vertical-align: middle;
+  }
+
+  &__icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+}
