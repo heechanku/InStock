@@ -1,4 +1,3 @@
-
 import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WarehousesPage from "./pages/WarehousesPage/WarehousesPage";
@@ -13,7 +12,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Header />
-        <div className="App__body">
+        <div className="App__body">       
+
         <Routes>
           <Route path="/" element={<WarehousesPage />} />
           <Route path="/:id" element={<WarehouseItemPage />} />
