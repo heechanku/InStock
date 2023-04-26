@@ -60,8 +60,8 @@ const handleSubmit=(e)=>{
     return(
         <main>
             <h1> Add New Inventory Item</h1>
-        <form onSubmit={handleSubmit}>
-        <section>
+        <form className ="inventory-form" onSubmit={handleSubmit}>
+        <section className = "inventory-form__left">
         <h2>Item Details</h2>
         <label>Item Name<input type="text" ref={itemName}></input></label>
         <label>Descripton<textarea ref={description}></textarea></label>
@@ -72,7 +72,7 @@ const handleSubmit=(e)=>{
             ])}
         </select>
         </section>
-        <section>
+        <section className='inventory-form__right'>
         <h2>Item Availablity</h2>
         <h4>Status</h4>
         <label>In stock<input type="radio" value="In Stock"  checked={status === 'In Stock'} onChange={(e) => setStatus(e.target.value)}></input></label>
@@ -86,7 +86,7 @@ const handleSubmit=(e)=>{
     </select>
         </section>
        
-        <section>
+        <section className='inventory-form__bottom'>
             <Link to ="/">CANCEL</Link>
          <button type="submit" >Add Item</button>
         </section>
