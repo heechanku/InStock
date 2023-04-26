@@ -20,6 +20,7 @@ function App() {
           <Route path="/:id" element={<WarehouseItemPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/inventory/:id" element={<InventoryDetailsPage />} />
+          
         </Routes>
         </div>
         <Footer />
