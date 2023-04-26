@@ -7,13 +7,29 @@
   margin: 1rem;
   padding-top: 0.5rem;
 
+  &__tag{
+    @include mobile__lables-buttons;
+    text-transform: uppercase;
+    border-radius: 1.5rem;
+    padding: 0.25rem 0.5rem;
+    
+
+    &--green{
+      color: colors.$supporting-color-green;
+      background-color: adjust-color($color: colors.$supporting-color-green, $alpha: -0.9);  
+    }
+    &--red{
+      color: colors.$supporting-color-red;
+      background-color: adjust-color($color: colors.$supporting-color-red, $alpha: -0.9);  
+    }
+    
+  }
+
   &__header {
     padding: 1rem;
     display: flex;
     gap: 1rem;
     border-bottom: 1px solid colors.$secondary-color-cloud;
-
-  
   }
 
   &__title {
@@ -62,6 +78,7 @@
 
   &__detail-label{
     @include mobile__table-header;
+    margin-bottom: 0.25rem;
 
     @include tablet{
       @include tablet__table-header;

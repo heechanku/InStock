@@ -44,7 +44,7 @@ function InventoryDetailsPage() {
         <div className="inventory-details-page__container">
           <div className="inventory-details-page__detail-item">
             <h4 className="inventory-details-page__detail-label">STATUS:</h4>
-            <p>{item.status}</p>
+            <p><span className={`inventory-details-page__tag inventory-details-page__tag--${item.status==="In Stock" ? "green" : "red"}`}>{item.status}</span></p>
           </div>
           <div className="inventory-details-page__detail-item">
             <h4 className="inventory-details-page__detail-label">QUANTITY:</h4>
