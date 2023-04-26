@@ -51,7 +51,7 @@ function WarehouseList() {
           CONTACT INFORMATION <img className="warehouse-list__icon" src={sortIcon} alt="sort" />
         </div>
         <div className="warehouse-list__header-item">
-          ACTIONS <img className="warehouse-list__icon" src={sortIcon} alt="sort" />
+          ACTIONS
         </div>
       </div>
       <div className="warehouse-list__body">
