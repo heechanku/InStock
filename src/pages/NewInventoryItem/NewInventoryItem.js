@@ -3,6 +3,7 @@ import './NewInventoryItem.scss'
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import CategoryDropDown from '../../components/CategoryDropDown/CategoryDropDown'
+import WarehouseDropDown from '../../components/WarehouseDropDown/WareHouseDropDown'
 
 const base_url='http://localhost:5050';
 
@@ -18,7 +19,7 @@ const handleSubmit=()=>{
         const newItem={
             name:itemName.curent.value,
             descrption: description.curent.value,
-            category:getCategories(),
+            category:'',
             status:"",
             warehouse:"",
         }
@@ -43,6 +44,7 @@ const handleSubmit=()=>{
         <h4>Status</h4>
         <label>In stock<button type="radio" id="inStock" name="instock"></button></label>
         <label>Out of stock<button type="radio" id="outOfStock" name="outOfStock"></button></label>
+        <WarehouseDropDown />
 
         </section>
         </form>
@@ -65,7 +67,6 @@ const handleSubmit=()=>{
 export function getCategories(){
     axios.get(`${base_url}/api/dropdown/inventories/category`)
     .then((res)=>{
-        console.log("categories" ,res.data)
         return res.data
     })
     .catch(error => {
