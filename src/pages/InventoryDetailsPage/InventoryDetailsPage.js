@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import "./InventoryDetailsPage.scss";
 import backArrow from '../../assets/Icons/arrow_back-24px.svg';
 import editIcon from '../../assets/Icons/edit-24px.svg';
+import InventoryDetails from "../../components/InventoryDetails/InventoryDetails";
 
 
 const testItem = {
@@ -26,37 +27,10 @@ function InventoryDetailsPage() {
   return (
     <main className="inventory-details-page">
       <div className="inventory-details-page__header">
-        <h1 className="inventory-details-page__title"><button className="inventory-details-page__back-button"><img src={backArrow} alt="back" /></button>{item.item_name}</h1>
+        <h1 className="inventory-details-page__title"><button className="inventory-details-page__back-button"><img className="inventory-details-page__back-icon" src={backArrow} alt="back" /></button>{item.item_name}</h1>
         <button className="inventory-details-page__edit-button"><img className="inventory-details-page__edit-icon" src={editIcon} alt="edit" /><span className="inventory-details-page__edit-text">Edit</span></button>
       </div>
-      <div className="inventory-details-page__body">
-        <div className="inventory-details-page__container">
-          <div className="inventory-details-page__detail-item">
-            <h4 className="inventory-details-page__detail-label">ITEM DESCRIPTION:</h4>
-            <p>{item.description}</p>
-          </div>
-          <div className="inventory-details-page__detail-item">
-            <h4 className="inventory-details-page__detail-label">CATEGORY:</h4>
-            <p>{item.category}</p>
-          </div>
-
-        </div>
-        <div className="inventory-details-page__container">
-          <div className="inventory-details-page__detail-item">
-            <h4 className="inventory-details-page__detail-label">STATUS:</h4>
-            <p><span className={`inventory-details-page__tag inventory-details-page__tag--${item.status==="In Stock" ? "green" : "red"}`}>{item.status}</span></p>
-          </div>
-          <div className="inventory-details-page__detail-item">
-            <h4 className="inventory-details-page__detail-label">QUANTITY:</h4>
-            <p>{item.quantity}</p>
-          </div>
-          <div className="inventory-details-page__detail-item">
-            <h4 className="inventory-details-page__detail-label">WAREHOUSE:</h4>
-            <p>{warehouseName}</p>
-          </div>
-          
-        </div>
-      </div>
+      <InventoryDetails description={item.description} category={item.category} status={item.status} quantity={item.quantity} warehouseName={warehouseName} />
     </main>
   );
 }
