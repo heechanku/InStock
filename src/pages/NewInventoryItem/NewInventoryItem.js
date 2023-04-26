@@ -2,65 +2,100 @@ import { useRef, useState, useEffect } from 'react';
 import './NewInventoryItem.scss'
 import {Link} from "react-router-dom";
 import axios from 'axios';
-import CategoryDropDown from '../../components/CategoryDropDown/CategoryDropDown'
-import WarehouseDropDown from '../../components/WarehouseDropDown/WareHouseDropDown'
+
 
 const base_url='http://localhost:5050';
 
 export default function NewInventoryItem() {
+
 const itemName = useRef("");
+const quantity = useRef("");
 const description = useRef("");
+const[selectedCategory, setSelectedCategory]= useState("");
+const[selectedWarehouse, setSelectedWarehouse]= useState("");
+const [status, setStatus]=useState("");
+const [warehouses, setWarehouses]=useState([]);
+const [categories, setCategories]=useState([]);
 
- 
 
 
-const handleSubmit=()=>{
-    
+useEffect(()=>{
+    axios.get(`${base_url}/api/warehouses`).then((res) =>{
+        setWarehouses(res.data);
+        return axios.get(`${base_url}/api/dropdown/inventories/category`);
+    })
+        .then((res) =>{
+            setCategories(res.data);
+        });
+    }, []);
+
+    const handleWarehouseChange = (e) => {
+        const warehouseId = e.target.value;
+        const warehouse = warehouses.find((w) => w.id === warehouseId);
+        setSelectedWarehouse(warehouse);
+      };   
+
+const handleSubmit=(e)=>{
+
+    e.preventDefault();
         const newItem={
-            name:itemName.curent.value,
-            descrption: description.curent.value,
-            category:'',
-            status:"",
-            warehouse:"",
+            item_name:itemName.current.value,
+            descrption: description.current.value,
+            category: selectedCategory,
+            quantity: quantity.current.value,
+            status:status,
+            warehouse_id: selectedWarehouse.id,
         }
+        
+    axios.post(`http://localhost:5050/api/inventories`, newItem).then(res=>{
+
+    })
+    .catch(error=>{
+        console.log(error);
+    });    
+    
+            console.log("NI", newItem);
     }
 
     return(
         <main>
             <h1> Add New Inventory Item</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
         <section>
         <h2>Item Details</h2>
-        
-        <label><input type="text" ref={itemName}></input></label>
-        <label>Descripton<textarea className="" ref={description}></textarea></label>
-        <CategoryDropDown />
-
-      
-
+        <label>Item Name<input type="text" ref={itemName}></input></label>
+        <label>Descripton<textarea ref={description}></textarea></label>
+        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+        <option value="">-- Select Category--</option>
+            {categories.map(category=>[
+                <option key={category}>{category}</option>
+            ])}
+        </select>
         </section>
         <section>
         <h2>Item Availablity</h2>
         <h4>Status</h4>
-        <label>In stock<button type="radio" id="inStock" name="instock"></button></label>
-        <label>Out of stock<button type="radio" id="outOfStock" name="outOfStock"></button></label>
-        <WarehouseDropDown />
-
+        <label>In stock<input type="radio" value="In Stock"  checked={status === 'In Stock'} onChange={(e) => setStatus(e.target.value)}></input></label>
+        <label>Out of stock<input type="radio" value="Out of Stock"  checked={status === 'Out of Stock'} onChange={(e) => setStatus(e.target.value)}></input></label>
+        <label>Quantity<input type="text" ref={quantity}></input></label>
+        <select value={selectedWarehouse?.id} onChange={handleWarehouseChange}>
+        <option value="">-- Select Warehouse --</option>
+      {warehouses.map((warehouse) => (
+        <option key={warehouse.id} value={warehouse.id}>{warehouse.warehouse_name}</option>
+      ))}
+    </select>
         </section>
-        </form>
+       
         <section>
             <Link to ="/">CANCEL</Link>
-         <button type="submit" onSubmit={handleSubmit}>Add Item</button>
+         <button type="submit" >Add Item</button>
         </section>
-
-
-
+        </form>
+       
         </main>
 
         
     )
-
-
 
 }
 
