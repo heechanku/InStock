@@ -1,6 +1,43 @@
 @use "../../styles/partials/colors";
 @use "../../styles/partials/mixins" as *;
 
+
+.inventory-item {
+text-align: left;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  padding-top: 0.5rem;
+
+  &__header {
+    padding: 1.5rem 1rem 1rem;
+    display: flex;
+    gap: 1rem;
+    border-bottom: 1px solid colors.$secondary-color-cloud;
+
+    @include tablet {
+      padding: 1.5rem 2.25rem 1.5rem;
+    }
+  }
+
+  &__title {
+    @include mobile__page-header;
+    margin-right: auto;
+
+    @include tablet {
+      @include tablet__page-header;
+    }
+  }
+
+  &__back-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
+}
+
+
 .inventory-item {
 
     text-align: left;
