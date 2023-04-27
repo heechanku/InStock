@@ -1,14 +1,15 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./InventoryDetailsPage.scss";
 import backArrow from '../../assets/Icons/arrow_back-24px.svg';
 import editIcon from '../../assets/Icons/edit-24px.svg';
 import InventoryDetails from "../../components/InventoryDetails/InventoryDetails";
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import EditInventoryItem from "../../components/EditInventoryItem/EditInventoryItem";
 
 const baseUrl = process.env.REACT_APP_BASE_URL ?? "http://localhost:5050/api";
 
-function InventoryDetailsPage() {
+function InventoryDetailsPage({ mode = "view" }) {
   const { id } = useParams();
   const [item, setItem] = useState(null);
 
@@ -26,21 +27,18 @@ function InventoryDetailsPage() {
       })
   }, []);
 
-  //TEMP (Awaiting correction to api response)
-  const warehouseName = "Manhattan";
-
-  const { item_name, description, category, status, quantity } = item ?? {};
+  const { description, category, status, quantity, warehouse_name } = item ?? {};
 
   return (
     <main className="inventory-details-page">
       <div className="inventory-details-page__header">
         <h1 className="inventory-details-page__title">
-          <button className="inventory-details-page__back-button"><img className="inventory-details-page__back-icon" src={backArrow} alt="back" /></button>
-          {item_name ?? "Loading..."}
-        </h1>
-        <button className="inventory-details-page__edit-button"><img className="inventory-details-page__edit-icon" src={editIcon} alt="edit" /><span className="inventory-details-page__edit-text">Edit</span></button>
+          <Link to="/"><button className="inventory-details-page__back-button"><img className="inventory-details-page__back-icon" src={backArrow} alt="back" /></button></Link>{item.item_name}</h1>
+        {mode === "view" && <Link to="./edit"><button className="inventory-details-page__edit-button"> <img className="inventory-details-page__edit-icon" src={editIcon} alt="edit" /><span className="inventory-details-page__edit-text">Edit</span></button></Link>}
       </div>
-      <InventoryDetails description={description} category={category} status={status} quantity={quantity} warehouseName={warehouseName} />
+      {mode === "view" &&
+        <InventoryDetails description={description} category={category} status={status} quantity={quantity} warehouseName={warehouse_name} />}
+      {mode === "edit" && <EditInventoryItem />}
     </main>
   );
 }
