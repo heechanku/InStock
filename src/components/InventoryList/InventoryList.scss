@@ -1,0 +1,65 @@
+@use "../../styles/partials/colors";
+@use "../../styles/partials/mixins" as *;
+
+.inventory-list {
+  @include mobile__body-large;
+  text-align: left;
+  //TEMP
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  @include tablet {
+    @include tablet__body-large;
+  }
+
+  &__header-row {
+    color: colors.$secondary-color-slate;
+    background-color: colors.$background-color-grey;
+    @include tablet__table-header;
+    padding: 0.5rem 2rem;
+    width: 100%;
+    display: none;
+
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__header-item {
+    white-space: nowrap;
+    
+
+    @include tablet {
+        width: 17%;
+    }
+
+    &:last-child {
+      text-align: right;
+      @include tablet {
+        width: 10%;
+    }
+    }
+
+    
+    &--status {
+    @include tablet {
+            width: 28%;
+          }
+      
+    }
+
+   
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__icon {
+    vertical-align: middle;
+  }
+}
