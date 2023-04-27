@@ -3,6 +3,7 @@ import "./InventoryDetailsPage.scss";
 import backArrow from '../../assets/Icons/arrow_back-24px.svg';
 import editIcon from '../../assets/Icons/edit-24px.svg';
 import InventoryDetails from "../../components/InventoryDetails/InventoryDetails";
+import EditInventoryItem from "../../components/EditInventoryItem/EditInventoryItem";
 
 
 const testItem = {
@@ -31,6 +32,7 @@ function InventoryDetailsPage() {
         <button className="inventory-details-page__edit-button"><img className="inventory-details-page__edit-icon" src={editIcon} alt="edit" /><span className="inventory-details-page__edit-text">Edit</span></button>
       </div>
       <InventoryDetails description={item.description} category={item.category} status={item.status} quantity={item.quantity} warehouseName={warehouseName} />
+      <EditInventoryItem />
     </main>
   );
 }
