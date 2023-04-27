@@ -2,6 +2,7 @@ import "./WarehousesPage.scss";
 import WarehouseList from "../../components/WarehouseList/WarehouseList";
 import searchIcon from "../../assets/Icons/search-24px.svg";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import CtaButton from "../../components/CtaButton/CtaButton";
 import axios from 'axios';
@@ -54,8 +55,7 @@ function WarehousesPage() {
       <div className="warehouses-page__header">
         <h1 className="warehouses-page__title">Warehouses</h1>
         <input type="search" name="search" className="warehouses-page__search-field" placeholder="Search..." />
-        {/* <button className="warehouses-page__add-button">+ Add New Warehouse</button> */}
-        <CtaButton>+ Add New Warehouse</CtaButton>
+        <Link to="/add"><CtaButton>+ Add New Warehouse</CtaButton></Link>
       </div>
 
       {warehouses !== null
