@@ -73,9 +73,8 @@ function InventoryList() {
   const handleDeleteCancelled = () => {
     setDeletingId(null);
   };
-  // const handleDelete = (id) => {};
 
-  const handleEdit = (id) => {};
+  const handleEdit = (id) => { };
 
   return (
     <div className="inventory-list">
@@ -100,27 +99,21 @@ function InventoryList() {
       </div>
       <div className="inventory-list__body">
         <div className="inventory-list__row">
-          {inventories !== null && 
-          inventories.map((inventory) => (
-            <InventoryRow
-              key={inventory.id}
-              id={inventory.id}
-              name={inventory.item_name}
-              category={inventory.category}
-              status={inventory.status}
-              quantity={inventory.quantity}
-              onDelete={() => handleDelete(inventory.id)}
-              onEdit={() => handleEdit(inventory.id)}
-            />
-          ))}
+          {inventories !== null &&
+            inventories.map((inventory) => (
+              <InventoryRow
+                key={inventory.id}
+                id={inventory.id}
+                name={inventory.item_name}
+                category={inventory.category}
+                status={inventory.status}
+                quantity={inventory.quantity}
+                onDelete={() => handleDelete(inventory.id)}
+                onEdit={() => handleEdit(inventory.id)}
+              />
+            ))}
         </div>
       </div>
-
-      {inventories !== null ? (
-        <InventoryList inventories={inventories} onDelete={handleDelete} />
-      ) : (
-        <h2>Loading...</h2>
-      )}
 
       {deletingInventory && (
         <DeleteModal
