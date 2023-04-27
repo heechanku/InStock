@@ -4,6 +4,7 @@ import chevronRightIcon from "../../assets/Icons/chevron_right-24px.svg";
 import deleteIcon from "../../assets/Icons/delete_outline-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
 
+
 function WarehouseRow({ id, name, address, city, country, contactName, contactEmail, contactPhone, onDelete, onEdit }) {
   return (
     <div className="warehouse-row">

@@ -1,0 +1,41 @@
+@use "../../styles/partials/mixins" as *;
+@use '../../styles/partials/colors';
+
+.inventory-row {
+    display:flex;
+    flex-direction: row;
+    text-transform: uppercase;
+
+    &__container {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        background-color: colors.$background-color-grey;
+
+
+    }
+
+    &__container-headers {
+        color: colors.$secondary-color-slate;
+        background-color: colors.$background-color-grey;
+        @include tablet__table-header;
+        padding: 0.5rem 2rem;
+        width: 100%;
+        display: none;
+    
+        @include tablet {
+          display: flex;
+          justify-content: space-evenly;
+        }
+    }
+
+    &__container-sort {
+
+        align-items: center;
+
+        @include tablet {
+        min-height: 1.25rem;
+        max-height: 1.25rem;
+        }
+    }
+}
