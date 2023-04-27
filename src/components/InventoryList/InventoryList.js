@@ -2,6 +2,12 @@ import "./InventoryList.scss";
 import InventoryRow from "../InventoryRow/InventoryRow";
 import sortIcon from "../../assets/Icons/sort-24px.svg";
 
+import { useEffect, useState } from "react";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
+import axios from "axios";
+
+const baseUrl = process.env.REACT_APP_BASE_URL ?? "http://localhost:5050/api";
+
 //Test Data
 const inventoryData = [
   {
@@ -27,11 +33,48 @@ const inventoryData = [
 ];
 
 function InventoryList() {
-  const inventories = inventoryData;
+  // const inventories = inventoryData;
+  const [inventories, setInventories] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
+  const deletingInventory = inventories?.find(
+    (inventory) => inventory.id === deletingId
+  );
 
-  const handleDelete = (id) => {};
+  useEffect(() => {
+    if (inventories === null) {
+      axios
+        .get(`${baseUrl}/inventories`)
+        .then((response) => {
+          setInventories(response.data);
+        })
+        .catch((error) => {
+          alert(error);
+          console.error(error);
+        });
+    }
+  }, [inventories]);
 
-  const handleEdit = (id) => {};
+  const handleDelete = (id) => {
+    setDeletingId(id);
+  };
+
+  const handleDeleteConfirmed = (id) => {
+    axios
+      .delete(`${baseUrl}/inventories/${deletingId}`)
+      .then((response) => {
+        setDeletingId(null);
+        setInventories(null); //Triggers a warehouse list to reload
+      })
+      .catch((error) => {
+        alert(error);
+        console.error(error);
+      });
+  };
+  const handleDeleteCancelled = () => {
+    setDeletingId(null);
+  };
+
+  const handleEdit = (id) => { };
 
   return (
     <div className="inventory-list">
@@ -56,20 +99,30 @@ function InventoryList() {
       </div>
       <div className="inventory-list__body">
         <div className="inventory-list__row">
-          {inventories.map((inventory) => (
-            <InventoryRow
-              key={inventory.id}
-              id={inventory.id}
-              name={inventory.item_name}
-              category={inventory.category}
-              status={inventory.status}
-              quantity={inventory.quantity}
-              onDelete={() => handleDelete(inventory.id)}
-              onEdit={() => handleEdit(inventory.id)}
-            />
-          ))}
+          {inventories !== null &&
+            inventories.map((inventory) => (
+              <InventoryRow
+                key={inventory.id}
+                id={inventory.id}
+                name={inventory.item_name}
+                category={inventory.category}
+                status={inventory.status}
+                quantity={inventory.quantity}
+                onDelete={() => handleDelete(inventory.id)}
+                onEdit={() => handleEdit(inventory.id)}
+              />
+            ))}
         </div>
       </div>
+
+      {deletingInventory && (
+        <DeleteModal
+          title={`Delete ${deletingInventory.item_name} inventory?`}
+          message={`Please confirm that you'd like to delete ${deletingInventory.item_name} from the list of inventories. You won't be able to undo this action.`}
+          onConfirm={handleDeleteConfirmed}
+          onCancel={handleDeleteCancelled}
+        />
+      )}
     </div>
   );
 }
