@@ -1,6 +1,8 @@
 import './EditInventoryItem.scss';
 
 function EditInventoryItem({ }) {
+
+
     return (
         <form className="edit-inventory-item">
             <div className="edit-inventory-item__details-container">

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./InventoryDetailsPage.scss";
 import backArrow from '../../assets/Icons/arrow_back-24px.svg';
 import editIcon from '../../assets/Icons/edit-24px.svg';
@@ -17,7 +17,7 @@ const testItem = {
   quantity: 500,
 };
 
-function InventoryDetailsPage() {
+function InventoryDetailsPage({ mode = "view" }) {
   const { id } = useParams();
 
   //TEMP
@@ -28,11 +28,13 @@ function InventoryDetailsPage() {
   return (
     <main className="inventory-details-page">
       <div className="inventory-details-page__header">
-        <h1 className="inventory-details-page__title"><button className="inventory-details-page__back-button"><img className="inventory-details-page__back-icon" src={backArrow} alt="back" /></button>{item.item_name}</h1>
-        <button className="inventory-details-page__edit-button"><img className="inventory-details-page__edit-icon" src={editIcon} alt="edit" /><span className="inventory-details-page__edit-text">Edit</span></button>
+        <h1 className="inventory-details-page__title">
+          <Link to="/"><button className="inventory-details-page__back-button"><img className="inventory-details-page__back-icon" src={backArrow} alt="back" /></button></Link>{item.item_name}</h1>
+        {mode === "view" && <Link to="./edit"><button className="inventory-details-page__edit-button"> <img className="inventory-details-page__edit-icon" src={editIcon} alt="edit" /><span className="inventory-details-page__edit-text">Edit</span></button></Link>}
       </div>
-      <InventoryDetails description={item.description} category={item.category} status={item.status} quantity={item.quantity} warehouseName={warehouseName} />
-      <EditInventoryItem />
+      {mode === "view" &&
+        <InventoryDetails description={item.description} category={item.category} status={item.status} quantity={item.quantity} warehouseName={warehouseName} />}
+      {mode === "edit" && <EditInventoryItem />}
     </main>
   );
 }

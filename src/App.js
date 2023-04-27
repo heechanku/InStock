@@ -13,15 +13,17 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
-        <div className="App__body">       
+        <div className="App__body">
 
-        <Routes>
-          <Route path="/" element={<WarehousesPage />} />
-          <Route path="/:id" element={<WarehouseItemPage />} />
-          <Route path="/inventory" element={<InventoryPage />} />
-          <Route path="/inventory/:id" element={<InventoryDetailsPage />} />
-          
-        </Routes>
+          <Routes>
+            <Route path="/" element={<WarehousesPage />} />
+            <Route path="/:id" element={<WarehouseItemPage />} />
+            <Route path="/inventory" element={<InventoryPage />} />
+            <Route path="/inventory/:id" element={<InventoryDetailsPage mode="view" />} />
+            <Route path="/inventory/:id/edit" element={<InventoryDetailsPage mode="edit" />} />
+
+
+          </Routes>
         </div>
         <Footer />
       </BrowserRouter>
