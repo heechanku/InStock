@@ -5,7 +5,6 @@ import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsP
 import InventoryPage from "./pages/InventoryPage/InventoryPage";
 import InventoryDetailsPage from "./pages/InventoryDetailsPage/InventoryDetailsPage";
 import Header from "./components/Header/Header";
-import DeleteModal from "./components/DeleteModal/DeleteModal";
 import Footer from "./components/Footer/Footer";
 
 function App() {
@@ -17,7 +16,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<WarehousesPage />} />
-            <Route path="/:id" element={<WarehouseItemPage />} />
+            <Route path="/:id" element={<WarehouseDetailsPage />} />
             <Route path="/inventory" element={<InventoryPage />} />
             <Route path="/inventory/:id" element={<InventoryDetailsPage mode="view" />} />
             <Route path="/inventory/:id/edit" element={<InventoryDetailsPage mode="edit" />} />
