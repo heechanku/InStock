@@ -1,49 +1,47 @@
 import "./WarehousesPage.scss";
 import WarehouseList from "../../components/WarehouseList/WarehouseList";
 import searchIcon from "../../assets/Icons/search-24px.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
+import axios from 'axios';
 
-
-//Test Data
-const warehousesData = [
-  {
-    id: 0,
-    warehouse_name: "Manhattan",
-    address: "503 Broadway",
-    city: "Manhattan",
-    country: "USA",
-    contact_name: "Parmin Aujla",
-    contact_position: "Store Manager",
-    contact_email: "paujla@instock.com",
-    contact_phone: "+1 (629) 555-0129",
-  },
-  {
-    id: 2,
-    warehouse_name: "Washington",
-    address: "300 Pearl Street SW",
-    city: "Manhattan",
-    country: "USA",
-    contact_name: "Graema Lyon",
-    contact_position: "Warehouse Manager",
-    contact_email: "glyon@instock.com",
-    contact_phone: "+1 (647) 504-0911",
-  },
-];
+const baseUrl = process.env.REACT_APP_BASE_URL ?? "http://localhost:5050/api";
 
 function WarehousesPage() {
-  //TEMP
-  const warehouses = warehousesData;
-  
+  const [warehouses, setWarehouses] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
-  const deletingWarehouse = warehouses.find(warehouse => warehouse.id === deletingId);
+  const deletingWarehouse = warehouses?.find(warehouse => warehouse.id === deletingId);
+
+
+  useEffect(() => {
+    if (warehouses === null) {
+      axios
+        .get(`${baseUrl}/warehouses`)
+        .then(response => {
+          setWarehouses(response.data);
+        })
+        .catch(error => {
+          alert(error);
+          console.error(error);
+        });
+    }
+  }, [warehouses]);
 
   const handleDelete = (id) => {
     setDeletingId(id);
   };
+
   const handleDeleteConfirmed = (id) => {
-    //TODO: Send delete request
-    setDeletingId(null);
+    axios
+      .delete(`${baseUrl}/warehouses/${deletingId}`)
+      .then(response => {
+        setDeletingId(null);
+        setWarehouses(null); //Triggers a warehouse list to reload
+      })
+      .catch(error => {
+        alert(error);
+        console.error(error);
+      });
   };
   const handleDeleteCancelled = () => {
     setDeletingId(null);
@@ -56,12 +54,16 @@ function WarehousesPage() {
         <input type="search" name="search" className="warehouses-page__search-field" placeholder="Search..." />
         <button className="warehouses-page__add-button">+ Add New Warehouse</button>
       </div>
-      <WarehouseList warehouses={warehouses} onDelete={handleDelete} />
+
+      {warehouses !== null
+        ? <WarehouseList warehouses={warehouses} onDelete={handleDelete} />
+        : <h2>Loading...</h2>
+      }
 
       {deletingWarehouse && <DeleteModal
         title={`Delete ${deletingWarehouse.warehouse_name} warehouse?`}
         message={`Please confirm that you'd like to delete ${deletingWarehouse.warehouse_name} from the list of warehouses. You won't be able to undo this action.`}
-        onDelete={handleDeleteConfirmed}
+        onConfirm={handleDeleteConfirmed}
         onCancel={handleDeleteCancelled}
       />
       }
