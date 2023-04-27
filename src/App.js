@@ -6,6 +6,7 @@ import InventoryPage from "./pages/InventoryPage/InventoryPage";
 import InventoryDetailsPage from "./pages/InventoryDetailsPage/InventoryDetailsPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import NewInventoryItem from "./components/NewInventoryItem/NewInventoryItem";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="/:id" element={<WarehouseDetailsPage />} />
               <Route path="/inventory" element={<InventoryPage />} />
               <Route path="/inventory/:id" element={<InventoryDetailsPage mode="view" />} />
+              <Route path="/inventory/new" element={<NewInventoryItem />} />
               <Route path="/inventory/:id/edit" element={<InventoryDetailsPage mode="edit" />} />
             </Routes>
           </div>
