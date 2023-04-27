@@ -1,7 +1,7 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WarehousesPage from "./pages/WarehousesPage/WarehousesPage";
-import WarehouseItemPage from "./pages/WarehouseItemPage/WarehouseItemPage";
+import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsPage";
 import InventoryPage from "./pages/InventoryPage/InventoryPage";
 import InventoryDetailsPage from "./pages/InventoryDetailsPage/InventoryDetailsPage";
 import Header from "./components/Header/Header";
@@ -17,7 +17,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<WarehousesPage />} />
-          <Route path="/:id" element={<WarehouseItemPage />} />
+          <Route path="/:id" element={<WarehouseDetailsPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/inventory/:id" element={<InventoryDetailsPage />} />
           
