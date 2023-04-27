@@ -3,6 +3,8 @@
 
 .warehouse-details {
 
+    text-align: left;
+
     &__container-info {
       display: flex;
       flex-direction: column;
@@ -43,7 +45,6 @@
   
     &__container-address {
       display: flex;
-      text-align: center;
       flex-direction: column;
       margin: 0 0 0 1.5rem;
   
@@ -74,14 +75,19 @@
       margin: 0;
       font-weight: 600;
       text-transform: uppercase;
+
+      @include mobile__table-header; 
+      @include tablet {
+        @include tablet__table-header;
+      }
+     
     }
   
     &__text {
       font-size: 0.8125rem;
       line-height: 1.25rem;
   
-      @include tablet {
-  
+      @include tablet {  
       }
     }
   }
