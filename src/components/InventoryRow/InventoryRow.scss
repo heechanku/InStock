@@ -53,8 +53,7 @@
     &--status {
       order: -1;
       display: flex;
-      justify-content: center;
-      border-radius: 0.625rem;
+      justify-content: flex-start;
       width: 4.0625rem;
       margin-top: 0.1875rem;
 
@@ -68,7 +67,12 @@
         background-color: adjust-color(
           $color: colors.$supporting-color-green,
           $alpha: -0.9
+          
+
         );
+        border-radius: 2rem;
+        width: 5rem;
+        text-align: center;
       }
       &--red {
         color: colors.$supporting-color-red;
@@ -76,6 +80,9 @@
           $color: colors.$supporting-color-red,
           $alpha: -0.9
         );
+        border-radius: 2rem;
+        width: 6rem;
+        text-align: center;
       }
     }
 
