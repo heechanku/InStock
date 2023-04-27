@@ -1,0 +1,81 @@
+@use "../../styles/partials/_colors"; 
+@use "../../styles/partials/_mixins" as *;
+
+.warehouse-details {
+
+    &__container-info {
+      display: flex;
+      flex-direction: column;
+      margin: 1rem 0 0 0;
+  
+      @include tablet {
+        flex-direction: row;
+        margin: 1.5rem 0 0 0;
+      }
+    }
+  
+    &__container-details {
+      width: 50%;
+  
+      &--left {
+        margin: 0 0 0 1.5rem;
+  
+        @include tablet {
+          margin: 0 2.5rem 0 0;
+        }
+  
+        @include desktop {
+          margin: 0 1.5rem 0 0;
+        }
+      }
+  
+      &--right {
+        margin-right: 1.5rem;
+  
+        @include tablet {
+          width: 11rem;
+        }
+      }
+    }
+  
+    &__container-address {
+      display: flex;
+      flex-direction: column;
+      margin: 0 0 0 1.5rem;
+  
+      @include tablet {
+        margin: 0 3rem 1.5rem 2rem;
+        width: 35%;
+        border-right: .0625rem solid colors.$secondary-color-cloud;
+      }
+    }
+  
+    &__container-contact {
+      display: flex;
+      margin: 2rem 0 0 0;
+      padding: 0 0 1rem 0;
+      border-bottom: .0625rem solid colors.$secondary-color-cloud;
+      width: 50%;
+  
+      @include tablet {
+        margin: 0;
+        border-bottom: none;
+      }
+    }
+  
+    &__head {
+      color: colors.$secondary-color-slate;
+      margin: 0;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  
+    &__text {
+      font-size: 0.8125rem;
+      line-height: 1.25rem;
+  
+      @include tablet {
+        max-width: 7.5rem;
+      }
+    }
+  }

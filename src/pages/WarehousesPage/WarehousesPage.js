@@ -1,6 +1,6 @@
 import "./WarehousesPage.scss";
 import WarehouseList from "../../components/WarehouseList/WarehouseList";
-import searchIcon from "../../assets/Icons/search-24px.svg";
+
 
 function WarehousesPage() {
   return (
