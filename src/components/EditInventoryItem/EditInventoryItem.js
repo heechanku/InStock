@@ -36,8 +36,6 @@ function EditInventoryItem({ item }) {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        console.log({ ...values });
-        console.log({ name, value });
         setValues({ ...values, [name]: value });
     };
 
