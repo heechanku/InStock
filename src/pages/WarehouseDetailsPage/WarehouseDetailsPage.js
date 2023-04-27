@@ -5,7 +5,7 @@ import WarehouseDetails from "../../components/WarehouseDetails/WarehouseDetails
 import { Link, useParams } from "react-router-dom";
 import CtaButton from "../../components/CtaButton/CtaButton";
 
-function WarehouseDetailsPage() {
+function WarehouseDetailsPage({ mode = "view" }) {
   //const [singleWarehouse, setSingleWarehouse] = useState({}); * for later useState *
   const { id } = useParams();
 
@@ -22,18 +22,18 @@ function WarehouseDetailsPage() {
           />
         </Link>
         <h1 className="warehouse-details__title">Washington</h1>
-        <Link to={`/${id}/edit`} className="">
+        <Link to={`/${id}/edit`} className="warehouse-details__edit">
           <CtaButton>
             <img
               src={edit}
               alt="pencil"
               className="warehouse-details__edit-img"
             />
-            <span className="warehouse-details__edit-text">Edit</span>
+            <p className="warehouse-details__edit-text">Edit</p>
           </CtaButton>
         </Link>
       </div>
-      <WarehouseDetails />
+      {mode === "view" && <WarehouseDetails />}
     </section>
 
   );
