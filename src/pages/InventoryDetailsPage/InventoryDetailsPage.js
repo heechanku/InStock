@@ -27,13 +27,13 @@ function InventoryDetailsPage({ mode = "view" }) {
       })
   }, []);
 
-  const { description, category, status, quantity, warehouse_name } = item ?? {};
+  const { item_name, description, category, status, quantity, warehouse_name } = item ?? {};
 
   return (
     <main className="inventory-details-page">
       <div className="inventory-details-page__header">
         <h1 className="inventory-details-page__title">
-          <Link to="/"><button className="inventory-details-page__back-button"><img className="inventory-details-page__back-icon" src={backArrow} alt="back" /></button></Link>{item.item_name}</h1>
+          <Link to="/"><button className="inventory-details-page__back-button"><img className="inventory-details-page__back-icon" src={backArrow} alt="back" /></button></Link>{item_name}</h1>
         {mode === "view" && <Link to="./edit"><button className="inventory-details-page__edit-button"> <img className="inventory-details-page__edit-icon" src={editIcon} alt="edit" /><span className="inventory-details-page__edit-text">Edit</span></button></Link>}
       </div>
       {mode === "view" &&
