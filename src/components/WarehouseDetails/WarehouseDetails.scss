@@ -1,0 +1,93 @@
+@use "../../styles/partials/_colors"; 
+@use "../../styles/partials/_mixins" as *;
+
+.warehouse-details {
+
+    text-align: left;
+
+    &__container-info {
+      display: flex;
+      flex-direction: column;
+      margin: 1rem 0 0 0;
+  
+      @include tablet {
+        flex-direction: row;
+        margin: 1.5rem 0 0 0;
+      }
+    }
+  
+    &__container-details {
+      justify-content: center;
+      width: 100%;
+  
+      &--left {
+        margin: 0 0 0 1.5rem;
+  
+        @include tablet {
+          width: 50%;
+          margin: 0 2.5rem 0 0;
+        }
+  
+        @include desktop {
+          width: 50%;
+          margin: 0 1.5rem 0 0;
+        }
+      }
+  
+      &--right {
+        margin-right: 1.5rem;
+  
+        @include tablet {
+          width: 50%;
+        }
+      }
+    }
+  
+    &__container-address {
+      display: flex;
+      flex-direction: column;
+      margin: 0 0 0 1.5rem;
+  
+      @include tablet {
+        margin: 0 3rem 1.5rem 2rem;
+        width: 35%;
+        border-right: .0625rem solid colors.$secondary-color-cloud;
+      }
+    }
+  
+    &__container-contact {
+      display: flex;
+      margin: 2rem 0 0 0;
+      padding: 0 0 1rem 0;
+      border-bottom: .0625rem solid colors.$secondary-color-cloud;
+      width: 100%;
+      
+  
+      @include tablet {
+        width: 50%;
+        margin: 0;
+        border-bottom: none;
+      }
+    }
+  
+    &__head {
+      color: colors.$secondary-color-slate;
+      margin: 0;
+      font-weight: 600;
+      text-transform: uppercase;
+
+      @include mobile__table-header; 
+      @include tablet {
+        @include tablet__table-header;
+      }
+     
+    }
+  
+    &__text {
+      font-size: 0.8125rem;
+      line-height: 1.25rem;
+  
+      @include tablet {  
+      }
+    }
+  }

@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_BASE_URL ?? "http://localhost:5050/api";
 
+
 function WarehousesPage() {
   const [warehouses, setWarehouses] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
