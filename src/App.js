@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WarehousesPage from "./pages/WarehousesPage/WarehousesPage";
@@ -11,13 +10,14 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Header />
-        
+        <Header />
+
         <Routes>
           <Route path="/" element={<WarehousesPage />} />
           <Route path="/:id" element={<WarehouseItemPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/inventory/:id" element={<InventoryItemPage />} />
+         
         </Routes>
       </BrowserRouter>
     </div>
