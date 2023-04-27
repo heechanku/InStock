@@ -30,28 +30,23 @@
 
   &__header-item {
     white-space: nowrap;
-    
 
     @include tablet {
-        width: 17%;
+      width: 17%;
     }
 
     &:last-child {
       text-align: right;
       @include tablet {
         width: 10%;
-    }
+      }
     }
 
-    
     &--status {
-    @include tablet {
-            width: 28%;
-          }
-      
+      @include tablet {
+        width: 28%;
+      }
     }
-
-   
   }
 
   &__body {
