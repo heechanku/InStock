@@ -30,7 +30,7 @@ function InventoryRow({ id, name, category, status, quantity, onDelete, onEdit }
         
         <h4 className="inventory-row__cell-header">STATUS</h4>
         
-        <div className= "inventory-row__col--status--green">
+        <div className= {`inventory-row__col--status--${status === "IN STOCK" ? "green" : "red"}`}>
         {status}
         </div>
       </div>
