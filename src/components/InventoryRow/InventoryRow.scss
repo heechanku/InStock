@@ -53,6 +53,7 @@
     &--status {
       order: -1;
       display: flex;
+      flex-direction: column;
       justify-content: flex-start;
       width: 4.0625rem;
       margin-top: 0.1875rem;
