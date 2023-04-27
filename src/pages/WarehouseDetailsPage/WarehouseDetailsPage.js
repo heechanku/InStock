@@ -1,7 +1,6 @@
 import backArrow from "../../assets/Icons/arrow_back-24px.svg";
 import edit from "../../assets/Icons/edit-24px.svg";
 import "./WarehouseDetailsPage.scss";
-import WarehouseDetailsHeaders from "../../components/WarehouseDetailsHeaders/WarehouseDetailsHeaders";
 import WarehouseDetails from "../../components/WarehouseDetails/WarehouseDetails";
 import { Link } from "react-router-dom";
 

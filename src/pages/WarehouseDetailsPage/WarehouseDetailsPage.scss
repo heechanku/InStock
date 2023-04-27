@@ -24,6 +24,10 @@
         flex-direction: column;
         margin: 1rem 0 0 0;
 
+        @include tablet {
+            
+        }
+
     }
 
     &__container-address {
@@ -68,19 +72,23 @@
         background-repeat: no-repeat;
         border: none;
         border-radius: 1.5rem;
-        width: 5rem;
+        width: 2.25rem;
         height: 2.25rem;
         margin-right: 1.5rem;
         text-decoration: none;
         color: colors.$primary-color-white;
         background-color: colors.$primary-color-indigo;
+
+        @include tablet {
+            width: 5rem;
+        }
         
     }
 
     &__edit-img {
         color: colors.$primary-color-white;
         filter: brightness(1000%);
-        padding: 0 0 0.1rem 0;
+        padding: 0 .3rem 0.1rem 0;
     
         @include tablet {
           width: 1.25rem;
