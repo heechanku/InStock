@@ -9,7 +9,7 @@ function EditInventoryItem({ }) {
                 <h2 className='edit-inventory-item__heading'>Item Details</h2>
                 <div className="edit-inventory-item__form-group">
                     <div className="edit-inventory-item__field-item">
-                        <label className="edit-inventory-item__label" htmlFor="itemName">Item name</label>
+                        <label className="edit-inventory-item__label" htmlFor="itemName" >Item name</label>
                         <input className="edit-inventory-item__input" type="text" name="itemName" id="itemName" placeholder='Item Name' />
                     </div>
                     <div className="edit-inventory-item__field-item">

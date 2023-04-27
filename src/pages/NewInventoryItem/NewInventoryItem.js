@@ -54,41 +54,71 @@ const handleSubmit=(e)=>{
         console.log(error);
     });    
     
-            console.log("NI", newItem);
+          
     }
 
     return(
         <main>
-            <h1> Add New Inventory Item</h1>
-        <form className ="inventory-form" onSubmit={handleSubmit}>
-        <section className = "inventory-form__left">
-        <h2>Item Details</h2>
-        <label>Item Name<input type="text" ref={itemName}></input></label>
-        <label>Descripton<textarea ref={description}></textarea></label>
-        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-        <option value="">-- Select Category--</option>
+            <div className="inventory-item__header">
+
+            <h1 className="inventory-item__title"> Add New Inventory Item</h1>
+            </div>
+        <form className ="inventory-item" onSubmit={handleSubmit}>
+        <section className = "inventory-item__details-container">
+        <h2 className = 'inventory-item__heading'>Item Details</h2>
+        <div className="inventory-item__form-group">
+        <div className="inventory-item__field-item">
+        <label className="inventory-item__label" htmlFor="itemName" >Item name</label>
+        <input className="inventory-item__input" ref={itemName} type="text" name="itemName" id="itemName" placeholder='Item Name' />
+        </div>
+        <div className="inventory-item__field-item">
+        <label className="inventory-item__label" htmlFor="description">Description</label>
+        <textarea ref={description} className="inventory-item__input inventory-item__input--textarea" name="description" id="description" placeholder='Enter description...' />
+        </div>
+        <div className="inventory-item__field-item">
+        <label className="inventory-item__label" htmlFor="category">Category</label>
+        <select className="inventory-item__input inventory-item__input--select" name="warehouse" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+        <option value=""> Please Select </option>
             {categories.map(category=>[
                 <option key={category}>{category}</option>
             ])}
         </select>
+        </div>
+    </div>        
         </section>
-        <section className='inventory-form__right'>
-        <h2>Item Availablity</h2>
-        <h4>Status</h4>
-        <label>In stock<input type="radio" value="In Stock"  checked={status === 'In Stock'} onChange={(e) => setStatus(e.target.value)}></input></label>
-        <label>Out of stock<input type="radio" value="Out of Stock"  checked={status === 'Out of Stock'} onChange={(e) => setStatus(e.target.value)}></input></label>
-        <label>Quantity<input type="text" ref={quantity}></input></label>
-        <select value={selectedWarehouse?.id} onChange={handleWarehouseChange}>
-        <option value="">-- Select Warehouse --</option>
+        <section className='inventory-item__availability-container'>
+        <h2 className='inventory-item__heading'>Item Availability</h2>
+        <div className="inventory-item__form-group">
+        <div className="inventory-item__field-item">
+        <p className="inventory-item__label">Status</p>
+        <div className="inventory-item__radio-group">
+        <div className="inventory-item__field-item inventory-item__field-item--radio">
+        <label className="inventory-item__radio-label" htmlFor="statusInStock">In stock<input type="radio" value="In Stock"  checked={status === 'In Stock'} onChange={(e) => setStatus(e.target.value)}></input></label>
+        </div>
+        <div className="inventory-item__field-item inventory-item__field-item--radio">
+        <label className="inventory-item__radio-label" htmlFor="statusOutOnStock">Out of stock<input type="radio" value="Out of Stock"  checked={status === 'Out of Stock'} onChange={(e) => setStatus(e.target.value)}></input></label>
+       </div>
+        <div className="inventory-item__field-item inventory-item__field-item--radio">
+        <label className="inventory-item__label">Quantity<input className="inventory-item__input" type="text" ref={quantity}></input></label>
+        </div>
+        </div>
+        </div>
+        
+        <div className="inventory-item__field-item">
+        <label className="inventory-item__label" htmlFor="warehouse">Warehouse</label>
+        <select className="inventory-item__input inventory-item__input--select" name="warehouse" value={selectedWarehouse?.id} onChange={handleWarehouseChange}>
+        <option value="">Please Select</option>
       {warehouses.map((warehouse) => (
         <option key={warehouse.id} value={warehouse.id}>{warehouse.warehouse_name}</option>
       ))}
     </select>
+    </div>
+    </div>
         </section>
        
         <section className='inventory-form__bottom'>
-            <Link to ="/">CANCEL</Link>
-         <button type="submit" >Add Item</button>
+        <button className="inventory-item__button inventory-item__button--secondary" type="button">Cancel</button>
+         <button className="inventory-item__button inventory-item__button--primary" type="submit">Add Item</button>
         </section>
         </form>
        

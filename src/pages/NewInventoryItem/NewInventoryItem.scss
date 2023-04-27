@@ -1,25 +1,185 @@
-.inventory-form{
-    display:flex;
+@use "../../styles/partials/colors";
+@use "../../styles/partials/mixins" as *;
+
+.inventory-item {
+
+    text-align: left;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+    margin: 1rem;
+    padding-top: 0.5rem;
+  
+    &__header {
+      padding: 1.5rem 1rem 1rem;
+      display: flex;
+      gap: 1rem;
+      border-bottom: 1px solid colors.$secondary-color-cloud;
+  
+      @include tablet {
+        padding: 1.5rem 2.25rem 1.5rem;
+      }
+    }
+  padding: 1rem 0 0;
+
+  @include tablet {
+    display: flex;
     flex-wrap: wrap;
+  }
 
-    &__right{
-        border: 2px solid red;
-        display:flex;
-        flex-direction: column;
-        flex-basis: 50%;
+  &__heading {
+    @include mobile__subheader;
 
+    @include tablet {
+      @include tablet__subheader;
     }
-    &__left{
-        border: 2px solid green;
-        display:flex;
-        flex-direction: column;
-        flex-basis: 50%;
-    }
-    &__bottom{
-        border: 2px solid pink;
-        display: flex;
-        justify-content: flex-end;
-        width: 100vw;
+  }
 
+  &__field-item {
+    width: 100%;
+
+    &--radio {
+      @include tablet {
+        margin-right: 3rem;
+        width: auto;
+      }
     }
+  }
+
+  &__details-container {
+    border-bottom: 1px solid colors.$secondary-color-cloud;
+    padding: 1rem;
+
+    @include tablet {
+      border-bottom: none;
+      border-right: 1px solid colors.$secondary-color-cloud;
+      padding: 1rem 2.25rem;
+      width: 50%;
+    }
+  }
+
+  &__availability-container {
+    padding: 1rem;
+
+    @include tablet {
+      padding: 1rem 2.25rem;
+      width: 50%;
+    }
+  }
+
+  &__label {
+    @include mobile__lables-buttons;
+    margin-bottom: 0.25rem;
+    display: block;
+
+    @include tablet {
+      @include tablet__lables-buttons;
+    }
+  }
+
+  &__input {
+    font-family: "Titillium Web";
+    border: 1px solid colors.$secondary-color-cloud;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    min-height: 1.5rem;
+
+    &:focus {
+      border-color: colors.$primary-color-indigo;
+      outline: none;
+    }
+
+    &--textarea {
+      border-radius: 1rem;
+      min-height: 6rem;
+    }
+
+    &--radio {
+      margin-right: 0.5rem;
+      vertical-align: bottom;
+      width: 1rem;
+
+      &:checked + label {
+        color: colors.$primary-color-black;
+      }
+    }
+
+    &--select {
+      appearance: none;
+      background-image: url("../../assets/Icons/arrow_drop_down-24px.svg");
+      background-repeat: no-repeat;
+      background-position: right 0.5rem bottom 50%;
+
+      @include tablet {
+        padding: 0.75rem 1rem;
+      }
+    }
+  }
+
+  &__form-group {
+    padding-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &__radio-group {
+    display: flex;
+    width: 100%;
+  }
+
+  &__radio-label {
+    @include mobile__body-large;
+    color: colors.$secondary-color-cloud;
+
+    @include tablet {
+      @include tablet__body-large;
+    }
+  }
+
+  &__actions {
+    background-color: colors.$background-color-grey;
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+
+    @include tablet {
+      margin-top: 1rem;
+      justify-content: flex-end;
+    }
+  }
+
+  &__button {
+    @include mobile__lables-buttons;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    padding: 0.375rem 1.25em;
+    width: 100%;
+
+    @include tablet {
+      @include tablet__lables-buttons;
+      width: auto;
+    }
+
+    &--primary {
+      color: colors.$primary-color-white;
+      background-color: colors.$primary-color-indigo;
+      border: none;
+
+      &:hover {
+        background-color: colors.$primary-color-black;
+      }
+    }
+
+    &--secondary {
+      color: colors.$secondary-color-slate;
+      background-color: colors.$primary-color-white;
+      border: 1px solid colors.$secondary-color-cloud;
+
+      &:hover {
+        color: colors.$primary-color-indigo;
+        border-color: colors.$primary-color-indigo;
+      }
+    }
+  }
 }
