@@ -22,7 +22,7 @@ function InventoryRow({
     <div className="inventory-row">
       <div className="inventory-row__col inventory-row__col--name">
         <h4 className="inventory-row__cell-header">INVENTORY ITEM</h4>
-        <Link className="inventory-row__link" to={`/${id}`}>
+        <Link className="inventory-row__link" to={`/inventory/${id}`}>
           {name}
         </Link>
         <img
@@ -39,9 +39,8 @@ function InventoryRow({
         <h4 className="inventory-row__cell-header">STATUS</h4>
 
         <div
-          className={`inventory-row__col--status--${
-            status === "IN STOCK" ? "green" : "red"
-          }`}
+          className={`inventory-row__col--status--${status === "IN STOCK" ? "green" : "red"
+            }`}
         >
           {status}
         </div>
