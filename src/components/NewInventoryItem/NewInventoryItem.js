@@ -1,34 +1,66 @@
 import { useRef, useState, useEffect } from 'react';
 import './NewInventoryItem.scss'
-import { Link } from "react-router-dom";
+import { Link,  useNavigate  } from "react-router-dom";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import backArrow from '../../assets/Icons/arrow_back-24px.svg'
 
+<<<<<<< Updated upstream
 const base_url = 'http://localhost:5050';
 
 export default function NewInventoryItem() {
     const navigate = useNavigate();
+=======
+
+const baseUrl = process.env.REACT_ALL_BASE_URL ?? "http://localhost:5050/api";
+
+export default function NewInventoryItem() {
+  
+    const baseUrl = process.env.REACT_ALL_BASE_URL ?? "http://localhost:5050/api";
+>>>>>>> Stashed changes
     const itemName = useRef("");
-    const quantity = useRef("");
     const description = useRef("");
+    const quantity = useRef();
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedWarehouse, setSelectedWarehouse] = useState("");
     const [status, setStatus] = useState("");
     const [warehouses, setWarehouses] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [itemNameError, setItemNameError] = useState('');
+    const [descriptionError, setDescriptionError] = useState('');
+    const [stockStatus, setStockStatus] = useState('In Stock');
+    // const [quantity, setQuantity] = useState(0);
+  
+    const navigate = useNavigate();
+
+    const [shouldRender, setShouldRender] = useState(false);
+
+    function handleClicked() {
+      setShouldRender(false);
+    }
 
 
-
+    //Onload get warehouses and categories
     useEffect(() => {
-        axios.get(`${base_url}/api/warehouses`).then((res) => {
-            setWarehouses(res.data);
-            return axios.get(`${base_url}/api/dropdown/inventories/category`);
-        })
-            .then((res) => {
-                setCategories(res.data);
+        axios
+            .get(`${baseUrl}/warehouses`)
+            .then(response => {
+                setWarehouses(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Error while retrieving warehouses");
             });
-    }, []);
+        axios
+            .get(`${baseUrl}/dropdown/inventories/category`)
+            .then(response => {
+                setCategories(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Error while retrieving categories");
+            });
+        }, [])
 
     const handleWarehouseChange = (e) => {
         const warehouseId = e.target.value;
@@ -36,9 +68,38 @@ export default function NewInventoryItem() {
         setSelectedWarehouse(warehouse);
     };
 
-    const handleSubmit = (e) => {
+    const handleStatusChange = (event) => {
+        setStatus(event.target.value);
+        // Reset the quantity field when the status changes to Out of Stock
+        if (event.target.value === 'Out of Stock') {
+     
+          
+        }
+      };
+    
+  
 
+    const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Check that all fields are filled out
+        if (
+            itemName.current.value.trim() === "" ||
+            description.current.value.trim() === "" ||
+            selectedCategory === "" ||
+            status === "" ||
+            quantity=== "" || 
+            selectedWarehouse === null
+        ) {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        const quantityValue = quantity.current.value;
+        if (isNaN(quantityValue) || quantityValue < 0) {
+            alert("Quantity must be apositive number..");
+            
+        }
         const newItem = {
             item_name: itemName.current.value,
             descrption: description.current.value,
@@ -49,10 +110,23 @@ export default function NewInventoryItem() {
         }
 
         axios.post(`http://localhost:5050/api/inventories`, newItem)
+<<<<<<< Updated upstream
             .catch(error => {
                 console.log(error);
             });
 
+=======
+        .then(res => {
+        })
+        .catch(error => {
+            alert(error);
+            console.error(error);
+        });
+    }
+
+    const handleCancel = () => {
+        navigate(`/inventory`);
+>>>>>>> Stashed changes
     }
 
 
@@ -94,19 +168,19 @@ export default function NewInventoryItem() {
 
                             <div className="inventory-item__radio-group">
                                 <div className="inventory-item__field-item inventory-item__field-item--radio">
-                                    <input className="inventory-item__input inventory-item__input--radio" type="radio" value="In Stock" checked={status === 'In Stock'} onChange={(e) => setStatus(e.target.value)} />
+                                    <input className=" inventory-item__field-item--out-of-stock  inventory-item__input inventory-item__input--radio" type="radio" value="In Stock" checked={status === 'In Stock'} onChange={handleStatusChange} />
                                     <label className="inventory-item__radio-label" htmlFor="statusInStock">In Stock</label>
                                 </div>
-                                <div className="inventory-item__field-item inventory-item__field-item--radio">
-                                    <input className="inventory-item__input inventory-item__input--radio" type="radio" value="Out of Stock" checked={status === 'Out of Stock'} onChange={(e) => setStatus(e.target.value)} />
+                                <div className=" inventory-item__field-item--out-of-stock inventory-item__field-item inventory-item__field-item--radio">
+                                    <input className="inventory-item__input inventory-item__radio-out inventory-item__input--radio" type="radio" value="Out of Stock" checked={status === 'Out of Stock'} onChange={handleStatusChange} />
                                     <label className="inventory-item__radio-label" htmlFor="statusOutOnStock">Out Of Stock</label>
                                 </div>
                             </div>
 
 
 
-                            <div className="inventory-item__field-item inventory-item__field-item--radio">
-                                <label className="inventory-item__label">Quantity<input className="inventory-item__input" type="text" ref={quantity}></input></label>
+                            <div className=" inventory-item__quantity inventory-item__field-item inventory-item__field-item--radio ">
+                                <label className="inventory-item__label">Quantity<input className="inventory-item__input inventory-item__quantity" type="text" ref={quantity}></input></label>
                             </div>
                         </div>
                     </div>
@@ -138,12 +212,3 @@ export default function NewInventoryItem() {
 
 }
 
-export function getCategories() {
-    axios.get(`${base_url}/api/dropdown/inventories/category`)
-        .then((res) => {
-            return res.data
-        })
-        .catch(error => {
-            console.log(error);
-        });
-}  
