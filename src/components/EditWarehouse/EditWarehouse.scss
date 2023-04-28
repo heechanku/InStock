@@ -1,0 +1,129 @@
+@use "../../styles/partials/colors";
+@use "../../styles/partials/mixins" as *;
+
+.edit-warehouse {
+  padding: 1rem 0 0;
+
+  @include tablet {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__heading {
+    @include mobile__subheader;
+
+    @include tablet {
+      @include tablet__subheader;
+    }
+  }
+
+  &__field-item {
+    width: 100%;
+
+  }
+
+  &__details-container {
+    border-bottom: 1px solid colors.$secondary-color-cloud;
+    padding: 1rem;
+
+    @include tablet {
+      border-bottom: none;
+      border-right: 1px solid colors.$secondary-color-cloud;
+      padding: 1rem 2.25rem;
+      width: 50%;
+    }
+  }
+
+  &__contact-container {
+    padding: 1rem;
+
+    @include tablet {
+      padding: 1rem 2.25rem;
+      width: 50%;
+    }
+  }
+
+  &__label {
+    @include mobile__lables-buttons;
+    margin-bottom: 0.25rem;
+    display: block;
+
+    @include tablet {
+      @include tablet__lables-buttons;
+    }
+  }
+
+  &__input {
+    font-family: "Titillium Web";
+    border: 1px solid colors.$secondary-color-cloud;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    min-height: 1.5rem;
+
+    &:focus {
+      border-color: colors.$primary-color-indigo;
+      outline: none;
+    }
+
+    &--textarea {
+      border-radius: 1rem;
+      min-height: 6rem;
+    }
+
+  }
+
+  &__form-group {
+    padding-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &__actions {
+    background-color: colors.$background-color-grey;
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+
+    @include tablet {
+      margin-top: 1rem;
+      justify-content: flex-end;
+    }
+  }
+
+  &__button {
+    @include mobile__lables-buttons;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    padding: 0.375rem 1.25em;
+    width: 100%;
+
+    @include tablet {
+      @include tablet__lables-buttons;
+      width: auto;
+    }
+
+    &--primary {
+      color: colors.$primary-color-white;
+      background-color: colors.$primary-color-indigo;
+      border: none;
+
+      &:hover {
+        background-color: colors.$primary-color-black;
+      }
+    }
+
+    &--secondary {
+      color: colors.$secondary-color-slate;
+      background-color: colors.$primary-color-white;
+      border: 1px solid colors.$secondary-color-cloud;
+
+      &:hover {
+        color: colors.$primary-color-indigo;
+        border-color: colors.$primary-color-indigo;
+      }
+    }
+  }
+}
