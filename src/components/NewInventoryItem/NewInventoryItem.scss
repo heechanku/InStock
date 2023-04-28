@@ -3,7 +3,10 @@
 
 
 .inventory-item {
-
+    text-align: left;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 1rem 1rem 1rem;
+    padding-top: 0.5rem;
 
   &__header {
     text-align: left;
@@ -37,10 +40,6 @@
     margin-right: 0.5rem;
   }
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     text-align: left;
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
     margin: 0 1rem 1rem 1rem;

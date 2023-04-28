@@ -2,43 +2,31 @@ import { useRef, useState, useEffect } from 'react';
 import './NewInventoryItem.scss'
 import { Link,  useNavigate  } from "react-router-dom";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import backArrow from '../../assets/Icons/arrow_back-24px.svg'
 
-<<<<<<< Updated upstream
-const base_url = 'http://localhost:5050';
 
 export default function NewInventoryItem() {
-    const navigate = useNavigate();
-=======
 
-const baseUrl = process.env.REACT_ALL_BASE_URL ?? "http://localhost:5050/api";
-
-export default function NewInventoryItem() {
-  
     const baseUrl = process.env.REACT_ALL_BASE_URL ?? "http://localhost:5050/api";
->>>>>>> Stashed changes
     const itemName = useRef("");
     const description = useRef("");
-    const quantity = useRef();
+    const quantity = useRef("");
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedWarehouse, setSelectedWarehouse] = useState("");
     const [status, setStatus] = useState("");
     const [warehouses, setWarehouses] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [itemNameError, setItemNameError] = useState('');
-    const [descriptionError, setDescriptionError] = useState('');
-    const [stockStatus, setStockStatus] = useState('In Stock');
-    // const [quantity, setQuantity] = useState(0);
-  
     const navigate = useNavigate();
 
-    const [shouldRender, setShouldRender] = useState(false);
+  
+    const handleCancel = () => {
+        navigate(`/inventory`);
 
-    function handleClicked() {
-      setShouldRender(false);
     }
 
+    function handleStatusChange(event) {
+        setStatus(event.target.value);
+      }
 
     //Onload get warehouses and categories
     useEffect(() => {
@@ -61,6 +49,7 @@ export default function NewInventoryItem() {
                 alert("Error while retrieving categories");
             });
         }, [])
+       
 
     const handleWarehouseChange = (e) => {
         const warehouseId = e.target.value;
@@ -68,16 +57,6 @@ export default function NewInventoryItem() {
         setSelectedWarehouse(warehouse);
     };
 
-    const handleStatusChange = (event) => {
-        setStatus(event.target.value);
-        // Reset the quantity field when the status changes to Out of Stock
-        if (event.target.value === 'Out of Stock') {
-     
-          
-        }
-      };
-    
-  
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -95,11 +74,13 @@ export default function NewInventoryItem() {
             return;
         }
 
+        // check that quantity input is a postive number
         const quantityValue = quantity.current.value;
         if (isNaN(quantityValue) || quantityValue < 0) {
-            alert("Quantity must be apositive number..");
+            alert("Quantity must be a positive number..");
             
         }
+        //create new item
         const newItem = {
             item_name: itemName.current.value,
             descrption: description.current.value,
@@ -108,29 +89,15 @@ export default function NewInventoryItem() {
             status: status,
             warehouse_id: selectedWarehouse.id,
         }
-
+        //send new item to server
         axios.post(`http://localhost:5050/api/inventories`, newItem)
-<<<<<<< Updated upstream
-            .catch(error => {
-                console.log(error);
-            });
-
-=======
-        .then(res => {
-        })
         .catch(error => {
             alert(error);
             console.error(error);
         });
     }
 
-    const handleCancel = () => {
-        navigate(`/inventory`);
->>>>>>> Stashed changes
-    }
 
-
-   
     return (
         <main>
             <div className="inventory-item__header">
@@ -168,20 +135,19 @@ export default function NewInventoryItem() {
 
                             <div className="inventory-item__radio-group">
                                 <div className="inventory-item__field-item inventory-item__field-item--radio">
-                                    <input className=" inventory-item__field-item--out-of-stock  inventory-item__input inventory-item__input--radio" type="radio" value="In Stock" checked={status === 'In Stock'} onChange={handleStatusChange} />
+                                    <input className="inventory-item__input inventory-item__input--radio" type="radio" value="In Stock" checked={status === 'In Stock'} onChange={handleStatusChange} />
                                     <label className="inventory-item__radio-label" htmlFor="statusInStock">In Stock</label>
                                 </div>
-                                <div className=" inventory-item__field-item--out-of-stock inventory-item__field-item inventory-item__field-item--radio">
-                                    <input className="inventory-item__input inventory-item__radio-out inventory-item__input--radio" type="radio" value="Out of Stock" checked={status === 'Out of Stock'} onChange={handleStatusChange} />
+                                <div className=" inventory-item__field-item inventory-item__field-item--radio">
+                                    <input className="inventory-item__input inventory-item__input--radio" type="radio" value="Out of Stock" checked={status === 'Out of Stock'} onChange={handleStatusChange} />
                                     <label className="inventory-item__radio-label" htmlFor="statusOutOnStock">Out Of Stock</label>
                                 </div>
                             </div>
-
-
-
+                            {status === 'In Stock' && (
                             <div className=" inventory-item__quantity inventory-item__field-item inventory-item__field-item--radio ">
                                 <label className="inventory-item__label">Quantity<input className="inventory-item__input inventory-item__quantity" type="text" ref={quantity}></input></label>
                             </div>
+                        )}
                         </div>
                     </div>
 
@@ -200,15 +166,10 @@ export default function NewInventoryItem() {
             <div className="inventory-item__actions">
                 <button className="inventory-item__button inventory-item__button--secondary" type="button">Cancel</button>
                 <button className="inventory-item__button inventory-item__button--primary" type="submit">Add Item</button>
-            </div>
-
-        
+            </div>   
         </form>
-       
         </main >
-
         
     )
-
 }
 
