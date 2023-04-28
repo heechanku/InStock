@@ -32,7 +32,7 @@ const inventoryData = [
   },
 ];
 
-function InventoryList() {
+function InventoryList({ warehousesId = null }) {
   // const inventories = inventoryData;
   const [inventories, setInventories] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
@@ -63,7 +63,7 @@ function InventoryList() {
       .delete(`${baseUrl}/inventories/${deletingId}`)
       .then((response) => {
         setDeletingId(null);
-        setInventories(null); //Triggers a warehouse list to reload
+        setInventories(null); //Triggers a inventory list to reload
       })
       .catch((error) => {
         alert(error);
