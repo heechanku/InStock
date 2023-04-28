@@ -4,6 +4,7 @@ import "./WarehouseDetailsPage.scss";
 import EditWarehouse from "../../components/EditWarehouse/EditWarehouse";
 import WarehouseDetails from "../../components/WarehouseDetails/WarehouseDetails";
 import { Link, useParams } from "react-router-dom";
+import CtaButton from "../../components/CtaButton/CtaButton";
 
 const testWarehouse = {
   
@@ -42,14 +43,15 @@ function WarehouseDetailsPage({ mode = "view" }) {
         <h1 className="warehouse-details__title">{warehouse.warehouse_name}</h1>
         {mode === "view" &&
           <Link to={`/${id}/edit`} className="warehouse-details__edit">
+          <CtaButton>
             <img
               src={edit}
               alt="pencil"
               className="warehouse-details__edit-img"
             />
-            <p className="warehouse-details__edit-text">Edit</p>
-          </Link>
-        }
+            <span className="warehouse-details__edit-text">Edit</span>
+          </CtaButton>
+        </Link>
       </div>
       {mode === "view" && <WarehouseDetails 
                               warehouseName={warehouse.warehouse_name}
