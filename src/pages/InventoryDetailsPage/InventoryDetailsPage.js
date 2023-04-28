@@ -39,7 +39,7 @@ function InventoryDetailsPage({ mode = "view" }) {
       </div>
       {mode === "view" &&
         <InventoryDetails description={description} category={category} status={status} quantity={quantity} warehouseName={warehouse_name} />}
-      {mode === "edit" && <EditInventoryItem item={item} />}
+      {mode === "edit" && (item!=null ? <EditInventoryItem item={item}/> : <h2>Loading...</h2>)}
     </main>
   );
 }
