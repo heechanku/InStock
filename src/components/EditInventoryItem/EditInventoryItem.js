@@ -95,7 +95,7 @@ function EditInventoryItem({ item }) {
                                 <label className="edit-inventory-item__radio-label" htmlFor="statusInStock">In Stock</label>
                             </div>
                             <div className="edit-inventory-item__field-item edit-inventory-item__field-item--radio">
-                                <input className="edit-inventory-item__input edit-inventory-item__input--radio" type="radio" name="status" id="statusOutOnStock" value="Out Of Stock" checked={values.status === 'Out Of Stock'} onChange={handleChange} />
+                                <input className="edit-inventory-item__input edit-inventory-item__input--radio" type="radio" name="status" id="statusOutOnStock" value="Out of Stock" checked={values.status === 'Out of Stock'} onChange={handleChange} />
                                 <label className="edit-inventory-item__radio-label" htmlFor="statusOutOnStock">Out Of Stock</label>
                             </div>
                         </div>
