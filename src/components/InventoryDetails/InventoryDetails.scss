@@ -14,13 +14,12 @@
 
   &__tag {
     @include mobile__lables-buttons;
-    text-transform: uppercase;
-    border-radius: 1.5rem;
-    padding: 0.25rem 0.5rem;
+    @include tag;
 
     &--green {
       color: colors.$supporting-color-green;
       background-color: adjust-color($color: colors.$supporting-color-green, $alpha: -0.9);
+      
     }
     &--red {
       color: colors.$supporting-color-red;
