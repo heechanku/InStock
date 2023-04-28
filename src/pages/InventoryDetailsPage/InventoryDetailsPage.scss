@@ -2,11 +2,6 @@
 @use "../../styles/partials/mixins" as *;
 
 .inventory-details-page {
-  text-align: left;
-  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
-  margin: 1rem;
-  padding-top: 0.5rem;
-
   &__header {
     padding: 1.5rem 1rem 1rem;
     display: flex;

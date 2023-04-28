@@ -29,7 +29,7 @@ function WarehouseDetailsPage({ mode = "view" }) {
               alt="pencil"
               className="warehouse-details__edit-img"
             />
-            <p className="warehouse-details__edit-text">Edit</p>
+            <span className="warehouse-details__edit-text">Edit</span>
           </CtaButton>
         </Link>
       </div>
