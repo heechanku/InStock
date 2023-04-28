@@ -1,5 +1,5 @@
 import "./WarehouseRow.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import chevronRightIcon from "../../assets/Icons/chevron_right-24px.svg";
 import deleteIcon from "../../assets/Icons/delete_outline-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
@@ -39,9 +39,9 @@ function WarehouseRow({ id, name, address, city, country, contactName, contactEm
         <button className="warehouse-row__icon-button" onClick={onDelete}>
           <img className="warehouse-row__icon" src={deleteIcon} alt="delete" />
         </button>
-        <button className="warehouse-row__icon-button" onClick={onEdit}>
-          <img className="warehouse-row__icon" src={editIcon} alt="edit" />
-        </button>
+        <Link className="warehouse-row__link" to={`/${id}/edit`}>
+            <img className="warehouse-row__icon" src={editIcon} alt="edit" />
+        </Link>
       </div>
     </div>
   );

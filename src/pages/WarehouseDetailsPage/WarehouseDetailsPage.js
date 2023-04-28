@@ -1,14 +1,33 @@
 import backArrow from "../../assets/Icons/arrow_back-24px.svg";
 import edit from "../../assets/Icons/edit-24px.svg";
 import "./WarehouseDetailsPage.scss";
+import EditWarehouse from "../../components/EditWarehouse/EditWarehouse";
 import WarehouseDetails from "../../components/WarehouseDetails/WarehouseDetails";
 import { Link, useParams } from "react-router-dom";
 import CtaButton from "../../components/CtaButton/CtaButton";
 import InventoryList from "../../components/InventoryList/InventoryList";
 
+const testWarehouse = {
+  
+    id: '2922c286-16cd-4d43-ab98-c79f698aeab0',
+    warehouse_name: 'Manhattan',
+    address: "503 Broadway",
+    city: "New York",
+    country: "USA",
+    contact_name: "Parmin Aujla",
+    contact_position: "Warehouse Manager",
+    contact_email: "paujla@instock.com",
+    contact_phone: "+1 (646) 123-1234",
+    created_at: null,
+    updated_at: "2023-04-27T22:00:12.000Z"
+}
+
 function WarehouseDetailsPage({ mode = "view" }) {
   //const [singleWarehouse, setSingleWarehouse] = useState({}); * for later useState *
   const { id } = useParams();
+
+  // TEMP
+  const warehouse = testWarehouse;
 
   return (
 
@@ -22,8 +41,9 @@ function WarehouseDetailsPage({ mode = "view" }) {
             className="warehouse-details__arrow-image"
           />
         </Link>
-        <h1 className="warehouse-details__title">Washington</h1>
-        <Link to={`/${id}/edit`} className="warehouse-details__edit">
+        <h1 className="warehouse-details__title">{warehouse.warehouse_name}</h1>
+        {mode === "view" &&
+          <Link to={`/${id}/edit`} className="warehouse-details__edit">
           <CtaButton>
             <img
               src={edit}
@@ -32,10 +52,20 @@ function WarehouseDetailsPage({ mode = "view" }) {
             />
             <span className="warehouse-details__edit-text">Edit</span>
           </CtaButton>
-        </Link>
+        </Link>}
       </div>
-      {mode === "view" && <WarehouseDetails />}
+      
+      {mode === "view" && <WarehouseDetails 
+                              warehouseName={warehouse.warehouse_name}
+                              address={warehouse.address} 
+                              city={warehouse.city} 
+                              country={warehouse.country} 
+                              contactName={warehouse.contact_name} 
+                              contactPhone={warehouse.contact_phone}
+                              contactEmail={warehouse.contact_email}
+                              position={warehouse.contact_position} />}
       {mode === 'view' && <InventoryList warehouseId={id}/>}
+      {mode === "edit" && <EditWarehouse warehouse={warehouse} />}
     </section>
 
   );
