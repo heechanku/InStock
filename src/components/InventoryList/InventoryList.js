@@ -32,7 +32,7 @@ const inventoryData = [
   },
 ];
 
-function InventoryList({ warehousesId = null }) {
+function InventoryList({ warehouseId = null }) {
   // const inventories = inventoryData;
   const [inventories, setInventories] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
@@ -42,8 +42,9 @@ function InventoryList({ warehousesId = null }) {
 
   useEffect(() => {
     if (inventories === null) {
+        const url = warehouseId === null ? `${baseUrl}/inventories` :  `${baseUrl}/warehouses/${warehouseId}/inventories`
       axios
-        .get(`${baseUrl}/inventories`)
+        .get(url)
         .then((response) => {
           setInventories(response.data);
         })

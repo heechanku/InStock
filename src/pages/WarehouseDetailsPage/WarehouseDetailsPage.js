@@ -4,6 +4,7 @@ import "./WarehouseDetailsPage.scss";
 import WarehouseDetails from "../../components/WarehouseDetails/WarehouseDetails";
 import { Link, useParams } from "react-router-dom";
 import CtaButton from "../../components/CtaButton/CtaButton";
+import InventoryList from "../../components/InventoryList/InventoryList";
 
 function WarehouseDetailsPage({ mode = "view" }) {
   //const [singleWarehouse, setSingleWarehouse] = useState({}); * for later useState *
@@ -34,6 +35,7 @@ function WarehouseDetailsPage({ mode = "view" }) {
         </Link>
       </div>
       {mode === "view" && <WarehouseDetails />}
+      {mode === 'view' && <InventoryList warehouseId={id}/>}
     </section>
 
   );
