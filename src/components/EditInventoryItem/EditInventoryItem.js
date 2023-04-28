@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './EditInventoryItem.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import CtaButton from '../CtaButton/CtaButton';
 
 const baseUrl = process.env.REACT_ALL_BASE_URL ?? "http://localhost:5050/api";
 
@@ -110,8 +111,8 @@ function EditInventoryItem({ item }) {
 
             </div>
             <div className="edit-inventory-item__actions">
-                <button className="edit-inventory-item__button edit-inventory-item__button--secondary" type="button" onClick={handleCancel}>Cancel</button>
-                <button className="edit-inventory-item__button edit-inventory-item__button--primary" type="button" onClick={handleSave}>Save</button>
+                <CtaButton type="secondary" onClick={handleCancel}>Cancel</CtaButton>
+                <CtaButton onClick={handleSave}>Save</CtaButton>
             </div>
         </form>
     );
