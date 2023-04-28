@@ -1,14 +1,15 @@
 import "./WarehousesPage.scss";
 import WarehouseList from "../../components/WarehouseList/WarehouseList";
-import searchIcon from "../../assets/Icons/search-24px.svg";
+import NewWarehouse from "../../components/NewWarehouse/NewWarehouse";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_BASE_URL ?? "http://localhost:5050/api";
 
 
-function WarehousesPage() {
+function WarehousesPage({mode = "view"}) {
   const [warehouses, setWarehouses] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
   const deletingWarehouse = warehouses?.find(warehouse => warehouse.id === deletingId);
@@ -49,26 +50,32 @@ function WarehousesPage() {
   };
 
   return (
+      
     <main className="warehouses-page">
-      <div className="warehouses-page__header">
-        <h1 className="warehouses-page__title">Warehouses</h1>
-        <input type="search" name="search" className="warehouses-page__search-field" placeholder="Search..." />
-        <button className="warehouses-page__add-button">+ Add New Warehouse</button>
-      </div>
-
-      {warehouses !== null
-        ? <WarehouseList warehouses={warehouses} onDelete={handleDelete} />
-        : <h2>Loading...</h2>
+      {mode === "view" && 
+          <div className="warehouses-page__header">
+            <h1 className="warehouses-page__title">Warehouses</h1>
+            <input type="search" name="search" className="warehouses-page__search-field" placeholder="Search..." />
+            <Link to={"/add"}>
+              <button className="warehouses-page__add-button">+ Add New Warehouse</button>
+            </Link>
+          </div> 
       }
+      {mode === "view" && warehouses !== null
+        
+          ? <WarehouseList warehouses={warehouses} onDelete={handleDelete} />
+          : <h2>Add Warehouse</h2>
+        }
 
-      {deletingWarehouse && <DeleteModal
-        title={`Delete ${deletingWarehouse.warehouse_name} warehouse?`}
-        message={`Please confirm that you'd like to delete ${deletingWarehouse.warehouse_name} from the list of warehouses. You won't be able to undo this action.`}
-        onConfirm={handleDeleteConfirmed}
-        onCancel={handleDeleteCancelled}
-      />
-      }
-    </main>
+        {deletingWarehouse && <DeleteModal
+          title={`Delete ${deletingWarehouse.warehouse_name} warehouse?`}
+          message={`Please confirm that you'd like to delete ${deletingWarehouse.warehouse_name} from the list of warehouses. You won't be able to undo this action.`}
+          onConfirm={handleDeleteConfirmed}
+          onCancel={handleDeleteCancelled}
+        />
+        } 
+      {mode === "add" && <NewWarehouse />}      
+    </main>        
   );
 }
 export default WarehousesPage;

@@ -4,6 +4,7 @@ import "./WarehouseDetailsPage.scss";
 import EditWarehouse from "../../components/EditWarehouse/EditWarehouse";
 import WarehouseDetails from "../../components/WarehouseDetails/WarehouseDetails";
 import { Link, useParams } from "react-router-dom";
+import NewWarehouse from "../../components/NewWarehouse/NewWarehouse";
 
 const testWarehouse = {
   
