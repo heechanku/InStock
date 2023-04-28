@@ -55,10 +55,12 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      @include mobile__lables-buttons;
       width: 4.0625rem;
       margin-top: 0.1875rem;
 
       @include tablet {
+        @include tablet__lables-buttons;
         order: 0;
         min-width: 28%;
       }
@@ -71,7 +73,7 @@
           
 
         );
-        border-radius: 2rem;
+        @include tag;
         width: 5rem;
         text-align: center;
       }
@@ -81,8 +83,8 @@
           $color: colors.$supporting-color-red,
           $alpha: -0.9
         );
-        border-radius: 2rem;
-        width: 6rem;
+        @include tag;
+        width: 7rem;
         text-align: center;
       }
     }

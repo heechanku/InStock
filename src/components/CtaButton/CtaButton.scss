@@ -1,0 +1,49 @@
+@use "../../styles/partials/colors";
+@use "../../styles/partials/mixins" as *;
+
+.cta-button {
+  @include mobile__lables-buttons;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  width: 100%;
+  min-width: 2.25rem;
+  height: 2.25rem;
+
+  @include tablet {
+    @include tablet__lables-buttons;
+    padding: 0 1rem;
+    width: auto;
+    height: 2.375rem;
+  }
+
+  &--primary {
+    color: colors.$primary-color-white;
+    background-color: colors.$primary-color-indigo;
+    border: none;
+
+    &:hover {
+      background-color: colors.$primary-color-black;
+    }
+  }
+
+  &--secondary {
+    color: colors.$secondary-color-slate;
+    background-color: colors.$primary-color-white;
+    border: 1px solid colors.$secondary-color-cloud;
+
+    &:hover {
+      color: colors.$primary-color-indigo;
+      border-color: colors.$primary-color-indigo;
+    }
+  }
+
+  &--delete {
+    color: colors.$primary-color-white;
+    background-color: colors.$supporting-color-red;
+    border: none;
+
+    &:hover {
+      background-color: colors.$primary-color-black;
+    }
+  }
+}

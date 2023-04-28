@@ -1,9 +1,33 @@
+@use "./styles/partials/colors";
+@use "./styles/partials/mixins" as *;
+
 .App {
-  text-align: center;
+  background-color: colors.$background-color-grey;
+  // text-align: left;
 
   &__body {
     min-height: 100vh;
+    padding: 0 1rem;
+
+    @include tablet {
+      padding: 0 2.25rem;
+    }
   }
 }
 
+.page-container {
+  background-color: white;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 0.25rem;
+  position: relative;
+  top: -2.5rem;
+  margin: auto;
+  padding-top: 0.5rem;
+  width: auto;
+  max-width: 63.75rem;
 
+  @include tablet {
+    top: -4.5rem;
+    padding-top: 1rem;
+  }
+}

@@ -4,29 +4,36 @@ import "./WarehouseDetailsPage.scss";
 import EditWarehouse from "../../components/EditWarehouse/EditWarehouse";
 import WarehouseDetails from "../../components/WarehouseDetails/WarehouseDetails";
 import { Link, useParams } from "react-router-dom";
-import NewWarehouse from "../../components/NewWarehouse/NewWarehouse";
+import CtaButton from "../../components/CtaButton/CtaButton";
+import InventoryList from "../../components/InventoryList/InventoryList";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-const testWarehouse = {
-  
-    id: '2922c286-16cd-4d43-ab98-c79f698aeab0',
-    warehouse_name: 'Manhattan',
-    address: "503 Broadway",
-    city: "New York",
-    country: "USA",
-    contact_name: "Parmin Aujla",
-    contact_position: "Warehouse Manager",
-    contact_email: "paujla@instock.com",
-    contact_phone: "+1 (646) 123-1234",
-    created_at: null,
-    updated_at: "2023-04-27T22:00:12.000Z"
-}
+const baseUrl = process.env.REACT_APP_BASE_URL ?? "http://localhost:5050/api";
 
 function WarehouseDetailsPage({ mode = "view" }) {
   //const [singleWarehouse, setSingleWarehouse] = useState({}); * for later useState *
   const { id } = useParams();
 
   // TEMP
-  const warehouse = testWarehouse;
+
+
+  const [warehouse, setWarehouse] = useState(null);
+
+
+  useEffect(() => {
+    if (warehouse === null) {
+      axios
+        .get(`${baseUrl}/warehouses/${id}`)
+        .then(response => {
+          setWarehouse(response.data);
+        })
+        .catch(error => {
+          alert(error);
+          console.error(error);
+        });
+    }
+  }, [warehouse]); 
 
   return (
 
@@ -40,19 +47,24 @@ function WarehouseDetailsPage({ mode = "view" }) {
             className="warehouse-details__arrow-image"
           />
         </Link>
-        <h1 className="warehouse-details__title">{warehouse.warehouse_name}</h1>
+        {(mode === "view" && warehouse !== null ) && <h1 className="warehouse-details__title">{warehouse.warehouse_name}</h1>}
+        {(mode === "edit" && warehouse !== null ) && <h1 className="warehouse-details__title">Edit Warehouse</h1>}
+
+
         {mode === "view" &&
           <Link to={`/${id}/edit`} className="warehouse-details__edit">
+          <CtaButton>
             <img
               src={edit}
               alt="pencil"
               className="warehouse-details__edit-img"
             />
-            <p className="warehouse-details__edit-text">Edit</p>
-          </Link>
-        }
+            <span className="warehouse-details__edit-text">Edit</span>
+          </CtaButton>
+        </Link>}
       </div>
-      {mode === "view" && <WarehouseDetails 
+      
+      {(mode === "view" && warehouse !== null ) && <WarehouseDetails 
                               warehouseName={warehouse.warehouse_name}
                               address={warehouse.address} 
                               city={warehouse.city} 
@@ -60,8 +72,9 @@ function WarehouseDetailsPage({ mode = "view" }) {
                               contactName={warehouse.contact_name} 
                               contactPhone={warehouse.contact_phone}
                               contactEmail={warehouse.contact_email}
-                              position={warehouse.contact_position} />}
-      {mode === "edit" && <EditWarehouse warehouse={warehouse} />}
+                              position={warehouse.contact_position} />} 
+      {mode === 'view' && <InventoryList warehouseId={id}/>}
+      {(mode === "edit" && warehouse !== null )  && <EditWarehouse warehouse={warehouse} />}
     </section>
 
   );

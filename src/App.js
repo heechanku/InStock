@@ -7,6 +7,7 @@ import InventoryDetailsPage from "./pages/InventoryDetailsPage/InventoryDetailsP
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import NewInventoryItem from "./components/NewInventoryItem/NewInventoryItem";
+import NewWarehouse from "./components/NewWarehouse/NewWarehouse";
 
 function App() {
   return (
@@ -14,16 +15,18 @@ function App() {
       <BrowserRouter>
         <Header />
         <div className="App__body">
-
-          <Routes>
-            <Route path="/" element={<WarehousesPage mode="view" />} />
-            <Route path="/add" element={<WarehousesPage mode="add" />} />
-            <Route path="/:id" element={<WarehouseDetailsPage mode="view" />} />
-            <Route path="/:id/edit" element={<WarehouseDetailsPage mode="edit" />} />
-            <Route path="/inventory" element={<InventoryPage mode="view" />} />
-            <Route path="/inventory/:id" element={<InventoryDetailsPage mode="view" />} />
-            <Route path="/inventory/:id/edit" element={<InventoryDetailsPage mode="edit" />} />
-          </Routes>
+          <div className="page-container">
+            <Routes>
+              <Route path="/" element={<WarehousesPage />} />
+              <Route path="/add" element={<WarehousesPage mode="add" />} />
+              <Route path="/:id" element={<WarehouseDetailsPage />} />
+              <Route path="/:id/edit" element={<WarehouseDetailsPage  mode="edit"/>} />
+              <Route path="/inventory" element={<InventoryPage />} />
+              <Route path="/inventory/:id" element={<InventoryDetailsPage mode="view" />} />
+              <Route path="/inventory/new" element={<NewInventoryItem />} />
+              <Route path="/inventory/:id/edit" element={<InventoryDetailsPage mode="edit" />} />
+            </Routes>
+          </div>
         </div>
         <Footer />
       </BrowserRouter>

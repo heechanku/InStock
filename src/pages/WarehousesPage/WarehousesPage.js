@@ -4,6 +4,7 @@ import NewWarehouse from "../../components/NewWarehouse/NewWarehouse";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
+import CtaButton from "../../components/CtaButton/CtaButton";
 import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_BASE_URL ?? "http://localhost:5050/api";
@@ -52,19 +53,22 @@ function WarehousesPage({mode = "view"}) {
   return (
       
     <main className="warehouses-page">
-      {mode === "view" && 
-          <div className="warehouses-page__header">
-            <h1 className="warehouses-page__title">Warehouses</h1>
-            <input type="search" name="search" className="warehouses-page__search-field" placeholder="Search..." />
-            <Link to={"/add"}>
-              <button className="warehouses-page__add-button">+ Add New Warehouse</button>
-            </Link>
-          </div> 
-      }
-      {mode === "view" && warehouses !== null
+      <div className="warehouses-page__header">
+        {mode === "add" &&  <h1 className="warehouses-page__title">Add Warehouse</h1>}
+        
+        {mode === "view" &&
+        <>
+         <h1 className="warehouses-page__title">Warehouses</h1>
+        <input type="search" name="search" className="warehouses-page__search-field" placeholder="Search..." />
+        <Link to="/add"><CtaButton>+ Add New Warehouse</CtaButton></Link>
+        </>
+        }
+      </div>
+
+      {mode === "view" && (warehouses !== null
         
           ? <WarehouseList warehouses={warehouses} onDelete={handleDelete} />
-          : <h2>Add Warehouse</h2>
+          : <h2>Loading...</h2>)
         }
 
         {deletingWarehouse && <DeleteModal

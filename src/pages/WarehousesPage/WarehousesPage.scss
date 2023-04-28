@@ -2,16 +2,13 @@
 @use "../../styles/partials/mixins" as *;
 
 .warehouses-page {
-  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
-  margin: 1rem;
-  padding-top: 0.5rem;
-
   &__title {
     @include mobile__page-header;
     margin-right: auto;
 
     @include tablet {
       @include tablet__page-header;
+      flex: 2;
     }
   }
 
@@ -22,6 +19,7 @@
     gap: 1rem;
 
     @include tablet {
+      padding: 1rem 2.25rem;
       flex-direction: row;
     }
   }
@@ -30,6 +28,15 @@
     border: 1px solid colors.$secondary-color-cloud;
     border-radius: 1.5rem;
     padding: 0.5rem 1rem;
+    height: 2.25rem;
+    background-image: url("../../assets/Icons/search-24px.svg");
+    background-repeat: no-repeat;
+    background-position: right 1rem top 50%;
+
+    @include tablet {
+      flex: 1;
+      height: 2.375rem;
+    }
   }
 
   &__add-button {
