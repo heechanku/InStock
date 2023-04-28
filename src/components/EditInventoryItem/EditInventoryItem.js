@@ -60,7 +60,7 @@ function EditInventoryItem({ item }) {
     }
 
     const handleCancel = () => {
-        navigate(`/inventory/${item.id}`);
+        navigate(-1);
     }
 
     return (

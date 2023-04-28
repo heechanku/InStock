@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./InventoryDetailsPage.scss";
 import backArrow from '../../assets/Icons/arrow_back-24px.svg';
 import editIcon from '../../assets/Icons/edit-24px.svg';
@@ -10,6 +10,7 @@ import EditInventoryItem from "../../components/EditInventoryItem/EditInventoryI
 const baseUrl = process.env.REACT_APP_BASE_URL ?? "http://localhost:5050/api";
 
 function InventoryDetailsPage({ mode = "view" }) {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [item, setItem] = useState(null);
 
@@ -33,12 +34,12 @@ function InventoryDetailsPage({ mode = "view" }) {
     <main className="inventory-details-page">
       <div className="inventory-details-page__header">
         <h1 className="inventory-details-page__title">
-          <Link to="/"><button className="inventory-details-page__back-button"><img className="inventory-details-page__back-icon" src={backArrow} alt="back" /></button></Link>{item_name}</h1>
+          <button className="inventory-details-page__back-button" onClick={()=>navigate(-1)}><img className="inventory-details-page__back-icon" src={backArrow} alt="back" /></button>{item_name}</h1>
         {mode === "view" && <Link to="./edit"><button className="inventory-details-page__edit-button"> <img className="inventory-details-page__edit-icon" src={editIcon} alt="edit" /><span className="inventory-details-page__edit-text">Edit</span></button></Link>}
       </div>
       {mode === "view" &&
         <InventoryDetails description={description} category={category} status={status} quantity={quantity} warehouseName={warehouse_name} />}
-      {mode === "edit" && <EditInventoryItem item={item} />}
+      {mode === "edit" && (item!=null ? <EditInventoryItem item={item}/> : <h2>Loading...</h2>)}
     </main>
   );
 }
