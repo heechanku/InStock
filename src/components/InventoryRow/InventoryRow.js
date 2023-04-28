@@ -56,12 +56,12 @@ function InventoryRow({
         <button className="inventory-row__icon-button" onClick={onDelete}>
           <img className="inventory-row__icon" src={deleteIcon} alt="delete" />
         </button>
-        <button
+        <Link to={`/inventory/${id}/edit`}
           className="inventory-row__icon-button inventory-row__icon-button--edit"
           onClick={onEdit}
         >
           <img className="inventory-row__icon" src={editIcon} alt="edit" />
-        </button>
+        </Link>
       </div>
     </div>
   );

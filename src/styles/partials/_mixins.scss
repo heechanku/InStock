@@ -1,6 +1,5 @@
 @use "./colors" as *;
 
-
 // Breakpoints
 
 @mixin tablet {
@@ -152,13 +151,13 @@
   color: $primary-color-black;
 }
 
-  @mixin tablet__body-small {
-    font-family: "Titillium Web";
-    font-size: 14px;
-    line-height: 22px;
-    font-weight: 400;
-    color: $primary-color-black;
-  }
+@mixin tablet__body-small {
+  font-family: "Titillium Web";
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: $primary-color-black;
+}
 
 @mixin tablet__body-small {
   font-family: "Titillium Web";
@@ -166,4 +165,10 @@
   line-height: 18px;
   font-weight: 400;
   color: $primary-color-black;
+}
+
+@mixin tag {
+  text-transform: uppercase;
+  border-radius: 1.5rem;
+  padding: 0.25rem 0.5rem;
 }
