@@ -32,7 +32,7 @@ const inventoryData = [
   },
 ];
 
-function InventoryList() {
+function InventoryList({ warehouseId = null }) {
   // const inventories = inventoryData;
   const [inventories, setInventories] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
@@ -42,8 +42,9 @@ function InventoryList() {
 
   useEffect(() => {
     if (inventories === null) {
+        const url = warehouseId === null ? `${baseUrl}/inventories` :  `${baseUrl}/warehouses/${warehouseId}/inventories`
       axios
-        .get(`${baseUrl}/inventories`)
+        .get(url)
         .then((response) => {
           setInventories(response.data);
         })
@@ -63,7 +64,7 @@ function InventoryList() {
       .delete(`${baseUrl}/inventories/${deletingId}`)
       .then((response) => {
         setDeletingId(null);
-        setInventories(null); //Triggers a warehouse list to reload
+        setInventories(null); //Triggers a inventory list to reload
       })
       .catch((error) => {
         alert(error);

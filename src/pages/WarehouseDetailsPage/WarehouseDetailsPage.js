@@ -5,6 +5,7 @@ import EditWarehouse from "../../components/EditWarehouse/EditWarehouse";
 import WarehouseDetails from "../../components/WarehouseDetails/WarehouseDetails";
 import { Link, useParams } from "react-router-dom";
 import CtaButton from "../../components/CtaButton/CtaButton";
+import InventoryList from "../../components/InventoryList/InventoryList";
 
 const testWarehouse = {
   
@@ -51,8 +52,9 @@ function WarehouseDetailsPage({ mode = "view" }) {
             />
             <span className="warehouse-details__edit-text">Edit</span>
           </CtaButton>
-        </Link>
+        </Link>}
       </div>
+      
       {mode === "view" && <WarehouseDetails 
                               warehouseName={warehouse.warehouse_name}
                               address={warehouse.address} 
@@ -62,6 +64,7 @@ function WarehouseDetailsPage({ mode = "view" }) {
                               contactPhone={warehouse.contact_phone}
                               contactEmail={warehouse.contact_email}
                               position={warehouse.contact_position} />}
+      {mode === 'view' && <InventoryList warehouseId={id}/>}
       {mode === "edit" && <EditWarehouse warehouse={warehouse} />}
     </section>
 
