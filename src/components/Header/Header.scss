@@ -3,23 +3,10 @@
 @use "./../../styles/partials/typography" as *;
 
 .header {
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
+  text-align: center;
   color: $background-color-grey;
   background-color: $background-color-graphite;
 
-  // @include tablet {
-  //   padding: 32px;
-  //   display: flex;
-  //   flex-direction: row;
-  //   align-items: center;
-  //   justify-content: space-between;
-  // }
-  // @include desktop {
-  //   padding: 24px;
-  // }
 
   &__content {
     display: flex;
@@ -27,12 +14,12 @@
     align-items: stretch;
     justify-content: center;
     margin: auto;
-    padding: 1rem;
+    padding: 1rem 1rem 3rem;
     width: 100%;
     max-width: 63.75rem;
 
     @include tablet {
-      padding: 2rem;
+      padding: 2rem 2rem 6rem;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -40,7 +27,7 @@
     }
 
     @include desktop {
-      padding: 1.5rem;
+      padding: 1.5rem 1.5rem 6rem;
     }
   }
 

@@ -21,13 +21,14 @@
   border-radius: 0.25rem;
   position: relative;
   //TODO after the header height has been increased to the correct size, adjust this property to match
-  top: -1.5rem;
+  top: -2.5rem;
   margin: auto;
   padding-top: 0.5rem;
   width: auto;
   max-width: 63.75rem;
 
   @include tablet {
+    top: -4.5rem;
     padding-top: 1rem;
   }
 }
