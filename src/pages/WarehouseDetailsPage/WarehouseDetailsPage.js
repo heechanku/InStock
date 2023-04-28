@@ -3,6 +3,7 @@ import edit from "../../assets/Icons/edit-24px.svg";
 import "./WarehouseDetailsPage.scss";
 import WarehouseDetails from "../../components/WarehouseDetails/WarehouseDetails";
 import { Link, useParams } from "react-router-dom";
+import CtaButton from "../../components/CtaButton/CtaButton";
 
 function WarehouseDetailsPage({ mode = "view" }) {
   //const [singleWarehouse, setSingleWarehouse] = useState({}); * for later useState *
@@ -21,16 +22,16 @@ function WarehouseDetailsPage({ mode = "view" }) {
           />
         </Link>
         <h1 className="warehouse-details__title">Washington</h1>
-        {mode === "view" &&
-          <Link to={`/${id}/edit`} className="warehouse-details__edit">
+        <Link to={`/${id}/edit`} className="warehouse-details__edit">
+          <CtaButton>
             <img
               src={edit}
               alt="pencil"
               className="warehouse-details__edit-img"
             />
             <p className="warehouse-details__edit-text">Edit</p>
-          </Link>
-        }
+          </CtaButton>
+        </Link>
       </div>
       {mode === "view" && <WarehouseDetails />}
     </section>
