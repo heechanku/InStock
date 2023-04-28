@@ -2,13 +2,13 @@ import { useRef, useState, useEffect } from 'react';
 import './NewInventoryItem.scss'
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import backArrow from '../../assets/Icons/arrow_back-24px.svg'
-
 
 const base_url = 'http://localhost:5050';
 
 export default function NewInventoryItem() {
-
+    const navigate = useNavigate();
     const itemName = useRef("");
     const quantity = useRef("");
     const description = useRef("");
@@ -48,16 +48,15 @@ export default function NewInventoryItem() {
             warehouse_id: selectedWarehouse.id,
         }
 
-        axios.post(`http://localhost:5050/api/inventories`, newItem).then(res => {
-
-        })
+        axios.post(`http://localhost:5050/api/inventories`, newItem)
             .catch(error => {
                 console.log(error);
             });
 
-
     }
 
+
+   
     return (
         <main>
             <div className="inventory-item__header">

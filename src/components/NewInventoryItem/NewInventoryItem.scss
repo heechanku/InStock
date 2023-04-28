@@ -35,10 +35,6 @@ text-align: left;
     vertical-align: middle;
     margin-right: 0.5rem;
   }
-}
-
-
-.inventory-item {
 
     text-align: left;
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
@@ -97,6 +93,8 @@ text-align: left;
     padding: 1rem;
 
     @include tablet {
+     
+
       padding: 1rem 2.25rem;
       width: 50%;
     }
@@ -157,11 +155,13 @@ text-align: left;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    
   }
 
   &__radio-group {
     display: flex;
     width: 100%;
+    padding-bottom: 1rem;
   }
 
   &__radio-label {
