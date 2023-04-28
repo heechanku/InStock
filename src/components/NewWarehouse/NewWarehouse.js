@@ -22,46 +22,20 @@ export default function NewWarehouse() {
     
     })
 
-    const handleSubmit = (e) => {
-
-        e.preventDefault();
-        const newWarehouse = {
-
-            warehouse_name: values.warehouse_name.current,
-            address: values.address.current,
-            city: values.city.current,
-            country: values.country.current,
-            contact_name: values.contact_name.current,
-            contact_phone: values.contact_phone.current,
-            contact_email: values.contact_email.current
-
-        }
-
-        axios
-            .post(`http://localhost:5050/api/warehouses`, newWarehouse)
-            .then(res => {
-
-        })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
     const handleChange = (e) => {
         const {name, value} = e.target;
-        setValues(name, value);
-
+        setValues({...values,[name]: value});
     }
 
     const handleSave = () => {
         axios
-            .put(`${baseUrl}/warehouses`, {
+            .post(`${baseUrl}/warehouses`, {
                 "warehouse_name": values.warehouse_name,
                 "address": values.address,
                 "city": values.city,
                 "country": values.country,
                 "contact_name": values.contact_name,
-                "position": values.position,
+                "contact_position": values.position,
                 "contact_phone": values.contact_phone,
                 "contact_email": values.contact_email
             })
@@ -79,24 +53,24 @@ export default function NewWarehouse() {
     }
 
     return (
-        <form className="edit-warehouse" onSubmit={handleSubmit}>
+        <form className="edit-warehouse">
             <div className="edit-warehouse__details-container">
                 <h2 className='edit-warehouse__heading'>Warehouse Details</h2>
                 <div className="edit-warehouse__form-group">
                     <div className="edit-warehouse__field-item">
                         <label className="edit-warehouse__label" htmlFor="warehouseName">Warehouse name</label>
-                        <input className="edit-warehouse__input" type="text" name="warehouseName" id="warehouseName" placeholder='Warehouse Name' value={values.warehouse_name} onChange={handleChange} />
+                        <input className="edit-warehouse__input" type="text" name="warehouse_name" id="warehouseName" placeholder='Warehouse Name' value={values.warehouse_name} onChange={handleChange} />
                     </div>
                     <div className="edit-warehouse__field-item">
-                        <label className="edit-warehouse__label" htmlFor="warehouseName">Street Address</label>
+                        <label className="edit-warehouse__label" htmlFor="address">Street Address</label>
                         <input className="edit-warehouse__input" type="text" name="address" id="address" placeholder='Street Address' value={values.address} onChange={handleChange} />
                     </div>
                     <div className="edit-warehouse__field-item">
-                        <label className="edit-warehouse__label" htmlFor="warehouseName">City</label>
+                        <label className="edit-warehouse__label" htmlFor="city">City</label>
                         <input className="edit-warehouse__input" type="text" name="city" id="city" placeholder='City' value={values.city} onChange={handleChange} />
                     </div>
                     <div className="edit-warehouse__field-item">
-                        <label className="edit-warehouse__label" htmlFor="warehouseName">Country</label>
+                        <label className="edit-warehouse__label" htmlFor="country">Country</label>
                         <input className="edit-warehouse__input" type="text" name="country" id="country" placeholder='Country' value={values.country} onChange={handleChange} />
                     </div>
                 </div>
@@ -106,7 +80,7 @@ export default function NewWarehouse() {
                 <div className="edit-warehouse__form-group">
                     <div className="edit-warehouse__field-item">
                         <label className="edit-warehouse__label" htmlFor="warehouseName">Contact Name</label>
-                        <input className="edit-warehouse__input" type="text" name="contactName" id="contactName" placeholder='Contact Name' value={values.contactName} onChange={handleChange}  />
+                        <input className="edit-warehouse__input" type="text" name="contact_name" id="contactName" placeholder='Contact Name' value={values.contact_name} onChange={handleChange}  />
                     </div>
                     <div className="edit-warehouse__field-item">
                         <label className="edit-warehouse__label" htmlFor="warehouseName">Position</label>
@@ -114,11 +88,11 @@ export default function NewWarehouse() {
                     </div>
                     <div className="edit-warehouse__field-item">
                         <label className="edit-warehouse__label" htmlFor="warehouseName">Phone Number</label>
-                        <input className="edit-warehouse__input" type="text" name="phoneNumber" id="phoneNumber" placeholder='Phone Number' value={values.contactPhone} onChange={handleChange}  />
+                        <input className="edit-warehouse__input" type="text" name="contact_phone" id="phoneNumber" placeholder='Phone Number' value={values.contact_phone} onChange={handleChange}  />
                     </div>
                     <div className="edit-warehouse__field-item">
                         <label className="edit-warehouse__label" htmlFor="warehouseName">Email</label>
-                        <input className="edit-warehouse__input" type="text" name="email" id="email" placeholder='Email' value={values.email} onChange={handleChange}  />
+                        <input className="edit-warehouse__input" type="text" name="contact_email" id="email" placeholder='Email' value={values.contact_email} onChange={handleChange}  />
                     </div>
                 </div>
             </div>
