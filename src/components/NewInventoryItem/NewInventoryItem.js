@@ -9,15 +9,15 @@ import errorIcon from '../../assets/Icons/error-24px.svg';
 export default function NewInventoryItem() {
 
     const baseUrl = process.env.REACT_ALL_BASE_URL ?? "http://localhost:5050/api";
-    const itemName = useRef("");
-    const description = useRef("");
-    const quantity = useRef("");
+    const itemName = useRef(null);
+    const description = useRef(null);
+    const quantity = useRef(null);
     const [selectedCategory, setSelectedCategory] = useState("");
-    const [selectedWarehouse, setSelectedWarehouse] = useState("");
+    const [selectedWarehouse, setSelectedWarehouse] = useState(null);
     const [status, setStatus] = useState("");
     const [warehouses, setWarehouses] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [errors, setErrors] = useState({ itemName: false, description: false, quantity: false, selectedCategory: false, warehouse: false, status: false });
+    const [errors, setErrors] = useState({ itemName: false, description: false, quantity: false, category: false, warehouse: false, status: false });
     const navigate = useNavigate();
 
 
@@ -70,50 +70,36 @@ export default function NewInventoryItem() {
         newErrors.description = description.current.value.trim() === "";
         newErrors.category = selectedCategory === "";
         newErrors.status = status === "";
-        newErrors.quantity = quantity === "";
-        newErrors.warehouse = selectedWarehouse === "";
+        newErrors.warehouse = !selectedWarehouse;
 
         setErrors(newErrors);
 
-        if (newErrors.itemName || newErrors.description || newErrors.category || newErrors.status || newErrors.quantity) {
+        console.log(newErrors);
+
+        if (newErrors.itemName || newErrors.description || newErrors.category || newErrors.status || newErrors.quantity || newErrors.warehouse) {
             alert("Please fill out all fields.");
             return;
         }
 
-
-        // // Check that all fields are filled out
-        // if (
-        //     itemName.current.value.trim() === "" ||
-        //     description.current.value.trim() === "" ||
-        //     selectedCategory === "" ||
-        //     status === "" ||
-        //     quantity=== "" || 
-        //     selectedWarehouse === null
-        // ) {
-        //     alert("Please fill out all fields.");
-
-
-
-        //     return;
-        // }
-
         // check that quantity input is a postive number
-        const quantityValue = quantity.current.value;
+        const quantityValue = quantity.current?.value ?? 0;
+        
         if (isNaN(quantityValue) || quantityValue < 0) {
             alert("Quantity must be a positive number..");
-
         }
         //create new item
         const newItem = {
             item_name: itemName.current.value,
-            descrption: description.current.value,
+            description: description.current.value,
             category: selectedCategory,
-            quantity: quantity.current.value,
+            quantity: quantityValue,
             status: status,
             warehouse_id: selectedWarehouse.id,
         }
+
         //send new item to server
         axios.post(`http://localhost:5050/api/inventories`, newItem)
+            .then(response => navigate(`/inventory/${response.data.id}`))
             .catch(error => {
                 alert(error);
                 console.error(error);
@@ -139,7 +125,7 @@ export default function NewInventoryItem() {
                         <div className="inventory-item__field-item">
                             <label className="inventory-item__label" htmlFor="description">Description</label>
                             <textarea ref={description} className={`inventory-item__input ${errors.description ? "inventory-item__input--error" : ""} inventory-item__input--textarea`} name="description" id="description" placeholder='Enter description...' />
-                            {errors.itemName && <div className='inventory-item__error-label'><img className='inventory-item__error-icon' src={errorIcon} alt="error" />This field is required</div>}
+                            {errors.description && <div className='inventory-item__error-label'><img className='inventory-item__error-icon' src={errorIcon} alt="error" />This field is required</div>}
                         </div>
                         <div className="inventory-item__field-item">
                             <label className="inventory-item__label" htmlFor="category">Category</label>
@@ -149,7 +135,7 @@ export default function NewInventoryItem() {
                                     <option key={category}>{category}</option>
                                 ])}
                             </select>
-                            {errors.itemName && <div className='inventory-item__error-label'><img className='inventory-item__error-icon' src={errorIcon} alt="error" />This field is required</div>}
+                            {errors.category && <div className='inventory-item__error-label'><img className='inventory-item__error-icon' src={errorIcon} alt="error" />This field is required</div>}
                         </div>
                     </div>
                 </section>
@@ -170,7 +156,7 @@ export default function NewInventoryItem() {
                                 </div>
 
                             </div>
-                            {errors.itemName && <div className='inventory-item__error-label'><img className='inventory-item__error-icon' src={errorIcon} alt="error" />This field is required</div>}
+                            {errors.status && <div className='inventory-item__error-label'><img className='inventory-item__error-icon' src={errorIcon} alt="error" />This field is required</div>}
 
 
                         </div>
@@ -189,7 +175,7 @@ export default function NewInventoryItem() {
                                     <option key={warehouse.id} value={warehouse.id}>{warehouse.warehouse_name}</option>
                                 ))}
                             </select>
-                            {errors.itemName && <div className='inventory-item__error-label'><img className='inventory-item__error-icon' src={errorIcon} alt="error" />This field is required</div>}
+                            {errors.warehouse && <div className='inventory-item__error-label'><img className='inventory-item__error-icon' src={errorIcon} alt="error" />This field is required</div>}
                         </div>
                     </div>
 
