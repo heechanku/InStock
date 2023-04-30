@@ -67,12 +67,14 @@
       flex: 100%;
       display: flex;
       justify-content: space-between;
+      padding: 0 0.5rem;
       // padding: 1rem 0.5rem;
 
       @include tablet {
         flex: 1;
         gap: 1rem;
         justify-content: flex-end;
+        padding: 0;
       }
     }
   }
