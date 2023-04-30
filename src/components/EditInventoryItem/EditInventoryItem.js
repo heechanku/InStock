@@ -11,7 +11,6 @@ function EditInventoryItem({ item }) {
     const [values, setValues] = useState({ itemName: item.item_name, description: item.description, category: item.category, status: item.status, warehouse: item.warehouse_id, quantity: item.quantity });
     const [warehouses, setWarehouses] = useState(null);
     const [categories, setCategories] = useState(null);
-    const [error,setError] = useState(false);
 
 
     //Onload get warehouses and categories
