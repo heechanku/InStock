@@ -82,9 +82,13 @@
       vertical-align: bottom;
       width: 1rem;
 
-      &:checked + label {
-        color: colors.$primary-color-black;
-      }
+      // &[checked] + label {
+      //   color: colors.$secondary-color-cloud;
+      // }
+    }
+
+    &:invalid{
+      border-color: red;
     }
 
     &--select {
@@ -94,7 +98,13 @@
       background-position: right 0.5rem bottom 50%;
 
       @include tablet {
-        padding: 0.75rem 1rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    &[type="number"]{
+      @include desktop{
+        max-width: 8rem;
       }
     }
   }
@@ -113,7 +123,6 @@
 
   &__radio-label {
     @include mobile__body-large;
-    color: colors.$secondary-color-cloud;
 
     @include tablet {
       @include tablet__body-large;
