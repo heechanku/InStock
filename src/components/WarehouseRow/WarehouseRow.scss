@@ -26,7 +26,10 @@
   }
 
   &:hover {
-    background-color: adjust-color($color: colors.$primary-color-indigo, $alpha: -0.93);
+    background-color: adjust-color(
+      $color: colors.$primary-color-indigo,
+      $alpha: -0.93
+    );
   }
 
   &__contact-item {
@@ -94,6 +97,9 @@
 
     &:hover {
       text-decoration: underline;
+      .warehouse-row__icon {
+        transform: translateX(4px);
+      }
     }
   }
 
@@ -104,8 +110,11 @@
 
   &__icon {
     vertical-align: middle;
+    transition: transform 0.4s ease;
   }
-
+  &__icon:hover {
+    transform: translateX(4px);
+  }
   &__icon-button {
     background: none;
     border: none;
