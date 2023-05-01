@@ -1,0 +1,29 @@
+@use "./../../styles/partials/colors" as *;
+@use "./../../styles/partials/mixins" as *;
+@use "./../../styles/partials/typography" as *;
+
+.footer {
+  text-align: center;
+  padding: 16px;
+  display: flex;
+  margin-top: auto;
+  padding-bottom: 3rem;
+  align-items: center;
+  justify-content: center;
+  color: $background-color-grey;
+  background-color: $background-color-grey;
+
+  @include tablet {
+    padding: 32px;
+    display: flex;
+  }
+  @include desktop {
+    padding: 24px;
+  }
+  &__text {
+    @include mobile__body-small;
+    @include tablet {
+      @include tablet__body-small;
+    }
+  }
+}
