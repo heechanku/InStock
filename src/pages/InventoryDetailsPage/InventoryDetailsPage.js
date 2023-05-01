@@ -17,6 +17,7 @@ function InventoryDetailsPage({ mode = "view" }) {
   console.log(`${baseUrl}/inventories/${id}`);
 
   useEffect(() => {
+    if (item === null) {
     axios
       .get(`${baseUrl}/inventories/${id}`)
       .then(response => {
@@ -26,7 +27,13 @@ function InventoryDetailsPage({ mode = "view" }) {
         console.error(error);
         alert(error);
       })
-  }, []);
+    }
+  }, [item, id]);
+
+
+  const inventoryUpdateHandler = () => {
+    setItem(null);
+  }
 
   const { item_name, description, category, status, quantity, warehouse_name } = item ?? {};
 
@@ -39,7 +46,7 @@ function InventoryDetailsPage({ mode = "view" }) {
       </div>
       {mode === "view" &&
         <InventoryDetails description={description} category={category} status={status} quantity={quantity} warehouseName={warehouse_name} />}
-      {mode === "edit" && (item!=null ? <EditInventoryItem item={item}/> : <h2>Loading...</h2>)}
+      {mode === "edit" && (item!=null ? <EditInventoryItem onInventoryUpdated={inventoryUpdateHandler} item={item}/> : <h2>Loading...</h2>)}
     </main>
   );
 }
