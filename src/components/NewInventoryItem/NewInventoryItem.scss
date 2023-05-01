@@ -121,6 +121,10 @@
       outline: none;
     }
 
+    &--error{
+      border-color: colors.$supporting-color-red;
+    }
+
     &--textarea {
       border-radius: 1rem;
       min-height: 6rem;
@@ -135,12 +139,7 @@
         color: colors.$primary-color-black;
       }
     }
-    &-radio-out {
-      
-        &:checked ~ quantity {
-          display: none;
-        }
-      }
+    
     &--select {
       appearance: none;
       background-image: url("../../assets/Icons/arrow_drop_down-24px.svg");
@@ -164,7 +163,7 @@
   &__radio-group {
     display: flex;
     width: 100%;
-    padding-bottom: 1rem;
+    // padding-bottom: 1rem;
   }
 
   &__radio-label {
@@ -224,7 +223,16 @@
     }
   }
 
+  &__error-label{
+    color: colors.$supporting-color-red;
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.25rem 0;
+  }
 
+  &__error-icon{
+    width: 1rem;
+  }
 }
 
 
