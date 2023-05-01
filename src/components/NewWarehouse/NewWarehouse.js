@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './NewWarehouse.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import backArrow from '../../assets/Icons/arrow_back-24px.svg'
+
 
 const baseUrl = process.env.REACT_ALL_BASE_URL ?? "http://localhost:5050/api";
 

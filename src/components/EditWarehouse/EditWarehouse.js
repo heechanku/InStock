@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const baseUrl = process.env.REACT_ALL_BASE_URL ?? "http://localhost:5050/api";
 
-function EditWarehouse({ warehouse }) {
+function EditWarehouse({ warehouse, onWarehouseUpdated }) {
 
     const navigate = useNavigate();
     const [values, setValues] = useState({ 
@@ -15,24 +15,10 @@ function EditWarehouse({ warehouse }) {
         city: warehouse.city, 
         country: warehouse.country, 
         contactName: warehouse.contact_name,
-        position: warehouse.position,
+        position: warehouse.contact_position,
         contactPhone: warehouse.contact_phone,
         contactEmail: warehouse.contact_email
     });
-    const [warehouses, setWarehouses] = useState(null);
-
-    useEffect(() => {
-        axios
-            .get(`${baseUrl}/warehouses`)
-            .then(response => {
-                setWarehouses(response.data)
-                console.log(response.data)
-            })
-            .catch(error => {
-                console.error(error);
-                alert("Error while retrieving warehouses");
-            })
-    }, [])
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -40,6 +26,10 @@ function EditWarehouse({ warehouse }) {
     };
 
     const handleSave = () => {
+        if(!values) {
+            alert("Missing required fields.");
+            return;
+        }
         axios
             .put(`${baseUrl}/warehouses/${warehouse.id}`, {
                 "warehouse_name": values.warehouseName,
@@ -47,11 +37,13 @@ function EditWarehouse({ warehouse }) {
                 "city": values.city,
                 "country": values.country,
                 "contact_name": values.contactName,
-                "position": values.position,
+                "contact_position": values.position,
                 "contact_phone": values.contactPhone,
                 "contact_email": values.contactEmail
+                
             })
             .then(response => {
+                onWarehouseUpdated();
                 navigate(`/${warehouse.id}`);
             })
             .catch(error => {
@@ -71,19 +63,19 @@ function EditWarehouse({ warehouse }) {
                 <div className="edit-warehouse__form-group">
                     <div className="edit-warehouse__field-item">
                         <label className="edit-warehouse__label" htmlFor="warehouseName">Warehouse name</label>
-                        <input className="edit-warehouse__input" type="text" name="warehouseName" id="warehouseName" placeholder='Warehouse Name' value={warehouse.warehouse_name} onChange={handleChange} />
+                        <input className="edit-warehouse__input" type="text" name="warehouseName" id="warehouseName" placeholder='Warehouse Name' value={values.warehouseName} onChange={handleChange} />
                     </div>
                     <div className="edit-warehouse__field-item">
-                        <label className="edit-warehouse__label" htmlFor="warehouseName">Street Address</label>
-                        <input className="edit-warehouse__input" type="text" name="address" id="address" placeholder='Street Address' value={warehouse.address} onChange={handleChange} />
+                        <label className="edit-warehouse__label" htmlFor="address">Street Address</label>
+                        <input className="edit-warehouse__input" type="text" name="address" id="address" placeholder='Street Address' value={values.address} onChange={handleChange} />
                     </div>
                     <div className="edit-warehouse__field-item">
-                        <label className="edit-warehouse__label" htmlFor="warehouseName">City</label>
-                        <input className="edit-warehouse__input" type="text" name="city" id="city" placeholder='City' value={warehouse.city} onChange={handleChange} />
+                        <label className="edit-warehouse__label" htmlFor="city">City</label>
+                        <input className="edit-warehouse__input" type="text" name="city" id="city" placeholder='City' value={values.city} onChange={handleChange} />
                     </div>
                     <div className="edit-warehouse__field-item">
-                        <label className="edit-warehouse__label" htmlFor="warehouseName">Country</label>
-                        <input className="edit-warehouse__input" type="text" name="country" id="country" placeholder='Country' value={warehouse.country} onChange={handleChange} />
+                        <label className="edit-warehouse__label" htmlFor="country">Country</label>
+                        <input className="edit-warehouse__input" type="text" name="country" id="country" placeholder='Country' value={values.country} onChange={handleChange} />
                     </div>
                 </div>
             </div>
@@ -91,20 +83,20 @@ function EditWarehouse({ warehouse }) {
                 <h2 className='edit-warehouse__heading'>Contact Details</h2>
                 <div className="edit-warehouse__form-group">
                     <div className="edit-warehouse__field-item">
-                        <label className="edit-warehouse__label" htmlFor="warehouseName">Contact Name</label>
-                        <input className="edit-warehouse__input" type="text" name="contactName" id="contactName" placeholder='Contact Name' value={warehouse.contact_name} onChange={handleChange} />
+                        <label className="edit-warehouse__label" htmlFor="contactName">Contact Name</label>
+                        <input className="edit-warehouse__input" type="text" name="contactName" id="contactName" placeholder='Contact Name' value={values.contactName} onChange={handleChange} />
                     </div>
                     <div className="edit-warehouse__field-item">
-                        <label className="edit-warehouse__label" htmlFor="warehouseName">Position</label>
-                        <input className="edit-warehouse__input" type="text" name="position" id="position" placeholder='Position' value={warehouse.position} onChange={handleChange} />         
+                        <label className="edit-warehouse__label" htmlFor="position">Position</label>
+                        <input className="edit-warehouse__input" type="text" name="position" id="position" placeholder='Position' required={true} value={values.position} onChange={handleChange} />         
                     </div>
                     <div className="edit-warehouse__field-item">
-                        <label className="edit-warehouse__label" htmlFor="warehouseName">Phone Number</label>
-                        <input className="edit-warehouse__input" type="text" name="phoneNumber" id="phoneNumber" placeholder='Phone Number' value={warehouse.contact_phone} onChange={handleChange} />
+                        <label className="edit-warehouse__label" htmlFor="contactPhone">Phone Number</label>
+                        <input className="edit-warehouse__input" type="text" name="contactPhone" id="contactPhone" placeholder='Phone Number' value={values.contactPhone} onChange={handleChange} />
                     </div>
                     <div className="edit-warehouse__field-item">
-                        <label className="edit-warehouse__label" htmlFor="warehouseName">Email</label>
-                        <input className="edit-warehouse__input" type="text" name="email" id="email" placeholder='Email' value={warehouse.contact_email} onChange={handleChange} />
+                        <label className="edit-warehouse__label" htmlFor="contactEmail">Email</label>
+                        <input className="edit-warehouse__input" type="text" name="contactEmail" id="contactEmail" placeholder='Email' value={values.contactEmail} onChange={handleChange} />
                     </div>
                 </div>
             </div>

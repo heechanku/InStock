@@ -33,7 +33,11 @@ function WarehouseDetailsPage({ mode = "view" }) {
           console.error(error);
         });
     }
-  }, [warehouse]); 
+  }, [id, warehouse]); 
+
+  const warehouseUpdateHandler = () => {
+    setWarehouse(null);
+  }
 
   return (
 
@@ -48,6 +52,7 @@ function WarehouseDetailsPage({ mode = "view" }) {
           />
         </Link>
         {(mode === "view" && warehouse !== null ) && <h1 className="warehouse-details__title">{warehouse.warehouse_name}</h1>}
+        {/* {mode === "edit" && (item!=null ? <EditInventoryItem item={item}/> : <h2>Loading...</h2>)} */}
         {(mode === "edit" && warehouse !== null ) && <h1 className="warehouse-details__title">Edit Warehouse</h1>}
 
 
@@ -74,7 +79,7 @@ function WarehouseDetailsPage({ mode = "view" }) {
                               contactEmail={warehouse.contact_email}
                               position={warehouse.contact_position} />} 
       {mode === 'view' && <InventoryList warehouseId={id}/>}
-      {(mode === "edit" && warehouse !== null )  && <EditWarehouse warehouse={warehouse} />}
+      {mode === "edit" && (warehouse !== null ? <EditWarehouse onWarehouseUpdated ={warehouseUpdateHandler} warehouse={warehouse}/> : <h2>Loading...</h2>)}
     </section>
 
   );

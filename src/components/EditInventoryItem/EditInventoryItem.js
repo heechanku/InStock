@@ -6,11 +6,12 @@ import CtaButton from '../CtaButton/CtaButton';
 
 const baseUrl = process.env.REACT_ALL_BASE_URL ?? "http://localhost:5050/api";
 
-function EditInventoryItem({ item }) {
+function EditInventoryItem({ item, onInventoryUpdated }) {
     const navigate = useNavigate();
     const [values, setValues] = useState({ itemName: item.item_name, description: item.description, category: item.category, status: item.status, warehouse: item.warehouse_id, quantity: item.quantity });
     const [warehouses, setWarehouses] = useState(null);
     const [categories, setCategories] = useState(null);
+    
 
 
     //Onload get warehouses and categories
@@ -57,6 +58,7 @@ function EditInventoryItem({ item }) {
                 "quantity": values.quantity
             })
             .then(response => {
+                onInventoryUpdated();
                 navigate(`/inventory/${item.id}`);
             })
             .catch(error => {

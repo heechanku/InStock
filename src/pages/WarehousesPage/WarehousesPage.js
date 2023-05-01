@@ -3,6 +3,7 @@ import WarehouseList from "../../components/WarehouseList/WarehouseList";
 import NewWarehouse from "../../components/NewWarehouse/NewWarehouse";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import backArrow from '../../assets/Icons/arrow_back-24px.svg'
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import CtaButton from "../../components/CtaButton/CtaButton";
 import axios from 'axios';
@@ -54,7 +55,16 @@ function WarehousesPage({mode = "view"}) {
       
     <main className="warehouses-page">
       <div className="warehouses-page__header">
-        {mode === "add" &&  <h1 className="warehouses-page__title">Add Warehouse</h1>}
+        {mode === "add" && 
+        <> 
+        <Link to="/">
+          <button className="warehouses-page__back-button">
+            <img className="warehouses-page__arrow" src={backArrow} alt="back" />
+          </button>
+        </Link>
+        <h1 className="warehouses-page__title">Add New Warehouse</h1>
+        </>
+        }
         
         {mode === "view" &&
         <>
