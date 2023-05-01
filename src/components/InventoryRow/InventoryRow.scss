@@ -132,6 +132,9 @@
 
     &:hover {
       text-decoration: underline;
+      .inventory-row__icon {
+        transform: translateX(4px);
+      }
     }
   }
 
@@ -142,9 +145,7 @@
 
   &__icon {
     vertical-align: middle;
-  }
-  &__icon:hover {
-    transform: translateX(4px);
+    transition: transform 0.4s ease;
   }
 
   &__icon-button {

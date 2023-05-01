@@ -24,12 +24,13 @@ function InventoryRow({
         <h4 className="inventory-row__cell-header">INVENTORY ITEM</h4>
         <Link className="inventory-row__link" to={`/inventory/${id}`}>
           {name}
-        </Link>
-        <img
+          <img
           className="inventory-row__icon"
           src={chevronRightIcon}
           alt="open"
         />
+        </Link>
+       
       </div>
       <div className="inventory-row__col inventory-row__col--category">
         <h4 className="inventory-row__cell-header">CATEGORY</h4>
